@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import { FaFacebookF } from "react-icons/fa";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import MotionPathPlugin from "gsap/MotionPathPlugin";
+import { gsap } from "gsap";
 
 export const Page1 = () => {
   const skillRef = useRef();
@@ -18,8 +21,40 @@ export const Page1 = () => {
     }
   }, []);
 
+  const svgRef = useRef();
+  const leafRef = useRef();
+  const pathRef = useRef();
+  const tree = useRef();
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+    let tl = new gsap.timeline({
+      scrollTrigger: {
+        trigger: "#boxLength",
+        start: "top 22%",
+        end: "bottom -100%",
+        // markers: true,
+        clientLeft: 0.5,
+        scrub: true,
+        ease: "power1.inOut",
+      },
+    });
+    tl.to("#circle", {
+      motionPath: {
+        path: "#motionPath",
+        align: "#motionPath",
+        alignOrigin: [0.5, 0.5],
+        ease: "power1.inOut",
+      },
+    });
+  }, []);
+
   return (
-    <main className="w-full relative h-[100dvh] pb-40 overflow-scroll bg-slate-50 px-5 text-gray-950">
+    <main
+      id="animation"
+      ref={svgRef}
+      className="w-full relative  overflow-x-hidden pb-40 overflow-scroll bg-[#fafafa] px-5 text-gray-950"
+    >
       {/* name */}
       <div className="h-[13rem] font-semibold font-caveat flex items-center text-3xl capitalize ">
         <h1>vishal</h1>
@@ -33,7 +68,7 @@ export const Page1 = () => {
           </div>
         </div>
         <div className="space-y-3 text-sm ">
-          <p className="font-itim text-gray-700 leading-5 ">
+          <p className="font-itim text-gray-700 leading-5 pr-4 ">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. A pariatur
             corrupti maiores, aliquam consequuntur vero culpa quam eaque
           </p>
@@ -119,7 +154,7 @@ export const Page1 = () => {
       </div>
 
       {/* projects section this section will be invisible unless scroll starts */}
-      <div className="space-y-4 mt-20 ">
+      <div id="container" className="space-y-4 mt-20 ">
         <div className="text-center">
           <h1 className="font-itim text-xl">Project&apos;s</h1>
         </div>
@@ -131,12 +166,28 @@ export const Page1 = () => {
       </div>
 
       {/* skills section */}
-      <div id="skill" ref={skillRef} className="space-y-4 mt-20">
+      <motion.div
+        initial={{ visibility: "hidden", y: 100 }}
+        transition={{ type: "spring", duration: 0.5 }}
+        whileInView={{ visibility: "visible", y: 0 }}
+        ref={skillRef}
+        className="skill space-y-4 mt-20"
+      >
         <div className="text-center">
           <h1 className="font-itim text-xl">Skill&apos;s</h1>
         </div>
         {/* skill tree will be added */}
-      </div>
+        <div className="flex justify-center items-center">
+          <Image
+            ref={tree}
+            id="skillTree"
+            src={"/skillTree.svg"}
+            height={350}
+            width={350}
+            alt="skill tree"
+          />
+        </div>
+      </motion.div>
 
       {/* experience section */}
       <div className="space-y-10 mt-20">
@@ -223,13 +274,55 @@ export const Page1 = () => {
           you see, let&apos;s connect and build something together!
         </p>
         <p>Alternatively, here&apos;s a fancy sheet of paper.</p>
-        <div className="flex flex-col text-[1.1rem] leading-8 ">
-          <Link href={"test"}>Resume</Link>
-          <Link href={"test"} className="mt-3">
-            Linkdin
-          </Link>
-          <Link href={"test"}>Instagram</Link>
-          <Link href={"test"}>Email me</Link>
+        <div className="flex flex-col text-blue-600 text-[1.1rem] leading-8 ">
+          <div className="flex items-center gap-x-1 ">
+            <Link href={"test"}>Resume</Link>
+            <div className="mt-1.5">
+              <Image
+                className="size-4 -rotate-[40deg] "
+                src={"/arrow.svg"}
+                height={10}
+                width={24}
+                alt="arrow"
+              />
+            </div>
+          </div>
+          <div className="flex items-center mt-3 gap-x-1 ">
+            <Link href={"test"}>Linkdin</Link>
+            <div className="mt-1.5">
+              <Image
+                className="size-4 -rotate-[40deg] "
+                src={"/arrow.svg"}
+                height={10}
+                width={24}
+                alt="arrow"
+              />
+            </div>
+          </div>
+          <div className="flex items-center gap-x-1 ">
+            <Link href={"test"}>Instagram</Link>
+            <div className="mt-1.5">
+              <Image
+                className="size-4 -rotate-[40deg] "
+                src={"/arrow.svg"}
+                height={10}
+                width={24}
+                alt="arrow"
+              />
+            </div>
+          </div>
+          <div className="flex items-center gap-x-1 ">
+            <Link href={"test"}>Email me</Link>
+            <div className="mt-1.5">
+              <Image
+                className="size-4 -rotate-[40deg] "
+                src={"/arrow.svg"}
+                height={10}
+                width={24}
+                alt="arrow"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -413,7 +506,10 @@ export const Page1 = () => {
           </div>
         </div>
         {/* svg box */}
-        <div className="h-[85%] bg-transparent -mt-[2px] ">
+        <div
+          id="boxLength"
+          className="h-[85%] relative bg-transparent -mt-[2px] "
+        >
           <svg
             width="100%"
             className="-translate-x-[2px]"
@@ -423,16 +519,40 @@ export const Page1 = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
+              ref={pathRef}
               id="motionPath"
-              d="M7.49994 1C7.49994 1 0.979334 76.5085 0.999943 125C1.02039 173.102 6.93811 199.902 7.49994 248C8.22125 309.751 0.925594 344.245 0.999943 406C1.07218 465.999 7.27414 499.501 7.49994 559.5C7.74777 625.352 0.914359 662.148 0.999943 728C1.08274 791.706 7.5475 827.294 7.49994 891C7.45326 953.535 0.999943 1051 0.999943 1051"
+              d="M7.49994 1C7.49994 1 0.979334 76.5085 0.999943 125C1.02039 173.102 6.93811 199.902 7.49994 248C8.22125 309.751 0.925594 344.245 0.999943 406C1.07218 465.999 7.27414 499.501 7.49994 559.5C7.74777 625.352 0.914359 662.148 0.999943 728C1.08274 791.706 7.5475 827.294 7.49994 891C7.45326 953.535 0.999943 1051 0.999943 1051 "
               stroke="#FFB156"
-              strokeWidth="2"
+              strokeWidth="1"
+              strokeDasharray={5}
             />
-            <circle r="5" fill="blue">
-              <animateMotion dur="10s" repeatCount="indefinite" rotate="auto">
-                <mpath href="#motionPath" />
-              </animateMotion>
-            </circle>
+            <g
+              ref={leafRef}
+              id="circle"
+              transform="rotate(200) scale(0.2)"
+              fill="none"
+            >
+              <path
+                d="M25.3302 9.16305C23.0901 13.1649 22.5142 17.6388 23.6992 21.9138C20.7536 20.6576 17.3041 20.2596 13.919 21.0381V21.0366C12.2832 16.5033 12.5632 11.2219 15.1214 6.0236C19.0116 6.3561 22.4636 7.46641 25.3302 9.16305ZM49.8786 6.0236C52.4368 11.2219 52.7168 16.5033 51.081 21.0366V21.0381C47.6973 20.2599 44.248 20.6569 41.3008 21.9138C42.4858 17.6388 41.9099 13.1649 39.6698 9.16305C42.5364 7.46641 45.9884 6.3561 49.8786 6.0236Z"
+                fill="#5C4FC0"
+              />
+              <path
+                d="M34.6895 35.7527C38.4658 35.7527 42.0571 36.6759 45.1863 38.3206C45.5597 39.6209 45.7606 41.0014 45.7606 42.4324C45.7606 50.2194 39.8232 56.5339 32.5 56.5339C25.1768 56.5339 19.2394 50.2194 19.2394 42.4324C19.2394 41.0014 19.4403 39.6209 19.8137 38.3206V38.3177C22.9429 36.6745 26.5326 35.7512 30.3105 35.7512C30.7582 35.7513 28.6884 35.7507 34.6895 35.7527ZM32.5 1.6536C40.2016 6.75169 43.3274 14.6025 41.3008 21.9138C36.1482 24.1113 32.7068 28.8809 32.5095 34.2564L32.5 34.2683L32.4905 34.2564C32.2934 28.8848 28.8548 24.1126 23.6992 21.9138C21.6727 14.6028 24.7971 6.75273 32.5 1.6536Z"
+                fill="#615FC1"
+              />
+              <path
+                d="M32.4905 34.2564C32.4905 34.2594 32.4905 34.2624 32.4905 34.2653C32.5057 34.6505 32.4978 34.8456 32.5 35.7527L30.3105 35.7512C20.3679 35.7512 11.817 42.1251 9.44189 51.0388C9.04655 52.5227 7.6273 53.5637 5.99465 53.5637C4.03989 53.5637 2.44141 52.0769 2.44141 50.2298V34.7477C2.44141 25.4753 11.7937 18.7634 21.2961 21.1108C27.6792 22.6875 32.2613 28.0078 32.4905 34.2564Z"
+                fill="#756FCF"
+              />
+              <path
+                d="M43.7039 21.1108C53.1974 18.7655 62.5586 25.468 62.5586 34.7477V50.2298C62.5586 52.0763 60.9626 53.5652 59.0054 53.5652C57.3937 53.5652 55.958 52.5396 55.5581 51.0388C53.1724 42.0849 44.5821 35.7527 34.6895 35.7527L32.5 35.7527V34.7477C32.5 28.3444 37.0977 22.7426 43.7039 21.1108Z"
+                fill="#847ED6"
+              />
+              <path
+                d="M53.0408 20.0403C54.2903 15.3768 53.6949 10.2377 51.3149 5.40135C51.0344 4.83135 50.4031 4.49054 49.7351 4.54531C46.2711 4.84145 43.0889 5.71203 40.2499 7.13377C38.5505 4.57173 36.2578 2.32439 33.4122 0.440719C32.8656 0.0786797 32.1349 0.0786797 31.5883 0.440719C28.7427 2.32439 26.45 4.57173 24.7504 7.13377C21.9113 5.71203 18.7292 4.84145 15.2652 4.54531C14.5987 4.48995 13.966 4.8312 13.6854 5.40135C11.3054 10.2379 10.7101 15.3768 11.9595 20.0404C5.34886 22.2174 0.859375 28.0597 0.859375 34.7477V50.2298C0.859375 52.8709 3.13449 55.0481 5.99465 55.0481C8.36216 55.0481 10.4087 53.5309 10.9766 51.3989C12.0182 47.4896 14.4001 44.0028 17.6873 41.4703C17.6686 41.7901 17.6572 42.1107 17.6572 42.4325C17.6572 50.4655 23.4747 57.0978 30.9178 57.9298V74.3466C30.9178 75.1662 31.6262 75.8309 32.4998 75.8309C33.3734 75.8309 34.0819 75.1662 34.0819 74.3466V57.9297C41.6932 57.079 47.8115 50.0588 47.3126 41.4724C50.5997 44.0037 52.9816 47.4898 54.0232 51.3989C54.5992 53.5609 56.6712 55.0497 59.0052 55.0497C61.8491 55.0497 64.1405 52.8871 64.1405 50.2298V34.7477C64.1406 28.0593 59.6507 22.2168 53.0408 20.0403ZM49.9699 19.3235C47.7807 19.0202 45.5204 19.1342 43.3505 19.664C43.7531 16.3213 43.198 12.9102 41.7281 9.75829C43.8883 8.67559 46.2885 7.95878 48.8936 7.62272C50.59 11.5464 50.9628 15.6239 49.9699 19.3235ZM32.5 3.49972C38.3065 7.72855 41.4883 14.1791 39.9349 20.8875C36.6813 22.4576 34.0711 24.9855 32.5 28.1066C30.9281 24.9838 28.3171 22.4567 25.0651 20.8875C23.5107 14.1749 26.6974 7.72573 32.5 3.49972ZM16.1064 7.62272C18.7115 7.95878 21.1117 8.67544 23.2719 9.75814C21.8021 12.9101 21.2472 16.3213 21.6496 19.664C19.4794 19.1343 17.219 19.0202 15.0301 19.3235C14.0372 15.6239 14.4099 11.5464 16.1064 7.62272ZM7.90717 50.6786C7.53397 52.0786 5.67555 52.5484 4.60104 51.5371C4.22863 51.1878 4.0236 50.7235 4.0236 50.2296V34.7476C4.0236 28.91 8.24699 23.8653 14.2959 22.4798C22.4451 20.6057 30.5864 26.2341 30.9082 34.2671L30.3108 34.2667C19.7335 34.2668 10.4762 41.0369 7.90717 50.6786ZM32.5 55.0497C26.0603 55.0497 20.8214 49.3896 20.8214 42.4325C20.8214 41.3737 20.9447 40.3271 21.1848 39.312C23.9977 37.9521 27.1379 37.2356 30.3094 37.2356C32.9844 37.2369 30.7876 37.2372 34.6897 37.2372C37.8634 37.2372 41.0036 37.9541 43.8161 39.3152C45.7038 47.3029 40.0828 55.0497 32.5 55.0497ZM60.9766 50.2298C60.9766 51.2457 60.1011 52.0809 59.0054 52.0809C58.1196 52.0809 57.3172 51.5209 57.0928 50.6788C54.582 41.2547 45.4948 34.2684 34.6895 34.2684H34.0922C34.3136 28.7222 38.3806 23.9621 44.1069 22.5462C52.6641 20.4329 60.9766 26.4863 60.9766 34.7477V50.2298Z"
+                fill="black"
+              />
+            </g>
           </svg>
         </div>
       </div>
@@ -444,7 +564,7 @@ function Project() {
   return (
     <div
       style={{ boxShadow: "0 0 8px 0px #e5e5e5 " }}
-      className="rounded-md bg-slate-200 border-[1.2px] border-solid border-orange-200 "
+      className="rounded-md bg-slate-100 border-[1.2px] border-solid border-orange-100 "
     >
       <div className="flex">
         <div className="w-[70%] py-2 px-4">
