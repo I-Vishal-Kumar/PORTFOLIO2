@@ -7,84 +7,11 @@ import { motion } from "framer-motion";
 // import ScrollMagic from "scrollmagic";
 
 export const Page1 = () => {
-  const [skills, updateSkills] = useState([
-    {
-      language: "java script",
-      image: "/skillIcons/java_script.png",
-    },
-    {
-      language: "node js",
-      image: "/skillIcons/node_js.png",
-    },
-    {
-      language: "mongo db",
-      image: "/skillIcons/mongo_db.png",
-    },
-    {
-      language: "next js",
-      image: "/skillIcons/next_js.png",
-    },
-    {
-      language: "react",
-      image: "/skillIcons/react_js.png",
-    },
-    {
-      language: "tailwind",
-      image: "/skillIcons/tailwind.png",
-    },
-    {
-      language: "git",
-      image: "/skillIcons/git.svg",
-    },
-    {
-      language: "github",
-      image: "/skillIcons/github.svg",
-    },
-    {
-      language: "rest api",
-      image: "/skillIcons/api.png",
-    },
-  ]);
-  let [isDragging, updateDragging] = useState(false);
-  const [hoveredSkill, setHovered] = useState(-1);
-  let currentDragging = useRef(null);
-  let itemDragging = useRef(null);
-
-  function dragStart(e, draggingItem) {
-    setHovered(-1);
-    currentDragging.current = draggingItem;
-    itemDragging.current = e.target;
-    itemDragging.current.addEventListener("dragend", dragEnd);
-    updateDragging(true);
-  }
-  function dragEnd(e) {
-    updateDragging(false);
-    e.target.removeEventListener("dragend", dragEnd);
-    currentDragging.current = null;
-    itemDragging.current = null;
-  }
-
-  function dragEnter(e, dragOverItem) {
-    if (itemDragging.current !== e.target) {
-      // here we have to update the list according to the items dragged over;
-
-      let newList = JSON.parse(JSON.stringify(skills));
-
-      newList.splice(
-        dragOverItem.item_idx,
-        0,
-        newList.splice(currentDragging.current.item_idx, 1)[0]
-      );
-      currentDragging.current = dragOverItem;
-      updateSkills(newList);
-    }
-  }
-
   return (
-    <main className="w-full h-[100dvh] text-[#000] bg-[#FFC266] flex justify-center items-center">
+    <main className="w-full h-[100dvh] relative overflow-hidden text-[#000] bg-[#FFC266] flex justify-center items-center">
       <div
         style={{ boxShadow: "0 0 10px 1px gray" }}
-        className="h-[90%] w-[90%] overflow-hidden rounded-md p-4 flex justify-between items-center gap-x-5 bg-slate-100"
+        className="h-[90%] relative w-[90%] overflow-hidden rounded-md p-4 flex justify-between items-center gap-x-5 bg-slate-100"
       >
         {/* about me */}
         <section className="rounded-sm bg-slate-200 flex flex-col items-center h-[95%] w-[25%] py-4">
@@ -302,70 +229,10 @@ export const Page1 = () => {
             </h2>
           </div>
           {/* main items */}
-          <div className="h-full pt-[10%]  snap-align-start-10  px-10 overflow-x-hidden  w-[100%] ">
-            <div className="py-2 h-[80%] flex justify-center flex-col space-y-4">
-              <div className="flex space-x-4 items-center">
-                <div className="size-14 bg-gray-300 rounded-full"></div>
-                <div>
-                  <h1 className="text-xl font-itim">Developer.</h1>
-                </div>
-              </div>
-              <div className="space-y-3 text-sm ">
-                <p className="font-itim text-gray-700 text-wrap leading-5 pr-4 ">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. A
-                  pariatur corrupti maiores, aliquam consequuntur vero culpa
-                  quam eaque
-                </p>
-                <p className="font-itim text-gray-950">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
-              </div>
-              {/* skills */}
-              <div className="flex w-[70vw] pt-5 gap-x-2 gap-y-1 justify-starts flex-wrap ">
-                {skills.map((skill, i) => (
-                  <div
-                    key={i}
-                    draggable
-                    onDragEnter={(e) => {
-                      isDragging
-                        ? dragEnter(e, { group_idx: 0, item_idx: i })
-                        : null;
-                    }}
-                    onDragStart={(e) =>
-                      dragStart(e, { group_idx: 0, item_idx: i })
-                    }
-                    onMouseEnter={() => setHovered(i)}
-                    onMouseLeave={() => setHovered(-1)}
-                    className="rounded-full flex justify-center items-center size-8 relative bg-gray-100"
-                  >
-                    <Image
-                      height={20}
-                      alt={skill.language}
-                      width={20}
-                      src={skill.image}
-                    />
-                    {i === hoveredSkill && (
-                      <motion.div
-                        initial={{ y: 5, opacity: 0.2 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        className="absolute  min-w-[200%] h-full top-full -left-[50%] text-sm text-[#111] font-itim text-center"
-                      >
-                        <div className="flex justify-center">
-                          <FaArrowUp />
-                        </div>
-                        <p className="capitalize text-nowrap ">
-                          {skill.language}
-                        </p>
-                      </motion.div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="h-full pt-[10%] w-full snap-align-start-10  bg-red-200"></div>
+          <About />
+          <Projects />
           <div className="h-full pt-[10%] w-full snap-align-start-10  bg-blue-200"></div>
-          <div className="h-full pt-[10%] w-full snap-align-start-10  bg-green-200"></div>
+          <Experience />
 
           {/* scrollbar decors */}
           <div className="absolute top-0 right-0 w-5 bg-white h-[450%]"></div>
@@ -386,10 +253,229 @@ export const Page1 = () => {
           </div>
           <div className="w-full flex justify-center items-center bg-slate-300 flex-col aspect-square">
             <div className="size-10 bg-slate-50"></div>
-            <p className="font-itim capitalize pt-2 text-sm">hire me</p>
+            <p className="font-itim capitalize pt-2 text-sm">Experience</p>
           </div>
         </section>
+      </div>
+      {/* Theme changing icon */}
+      <div className="size-14 translate-x-2 -translate-y-2 rounded-full absolute top-0 right-0 bg-orange-400 flex items-center justify-center">
+        <div className="bg-white rounded-full size-7 mr-2 mt-2 "></div>
       </div>
     </main>
   );
 };
+
+function About() {
+  const [skills, updateSkills] = useState([
+    {
+      language: "java script",
+      image: "/skillIcons/java_script.png",
+    },
+    {
+      language: "node js",
+      image: "/skillIcons/node_js.png",
+    },
+    {
+      language: "mongo db",
+      image: "/skillIcons/mongo_db.png",
+    },
+    {
+      language: "next js",
+      image: "/skillIcons/next_js.png",
+    },
+    {
+      language: "react",
+      image: "/skillIcons/react_js.png",
+    },
+    {
+      language: "tailwind",
+      image: "/skillIcons/tailwind.png",
+    },
+    {
+      language: "git",
+      image: "/skillIcons/git.svg",
+    },
+    {
+      language: "github",
+      image: "/skillIcons/github.svg",
+    },
+    {
+      language: "rest api",
+      image: "/skillIcons/api.png",
+    },
+  ]);
+  let [isDragging, updateDragging] = useState(false);
+  const [hoveredSkill, setHovered] = useState(-1);
+  let currentDragging = useRef(null);
+  let itemDragging = useRef(null);
+
+  function dragStart(e, draggingItem) {
+    setHovered(-1);
+    currentDragging.current = draggingItem;
+    itemDragging.current = e.target;
+    itemDragging.current.addEventListener("dragend", dragEnd);
+    updateDragging(true);
+  }
+  function dragEnd(e) {
+    updateDragging(false);
+    e.target.removeEventListener("dragend", dragEnd);
+    currentDragging.current = null;
+    itemDragging.current = null;
+  }
+
+  function dragEnter(e, dragOverItem) {
+    if (itemDragging.current !== e.target) {
+      // here we have to update the list according to the items dragged over;
+
+      let newList = JSON.parse(JSON.stringify(skills));
+
+      newList.splice(
+        dragOverItem.item_idx,
+        0,
+        newList.splice(currentDragging.current.item_idx, 1)[0]
+      );
+      currentDragging.current = dragOverItem;
+      updateSkills(newList);
+    }
+  }
+  return (
+    <div className="h-full pt-[10%]  snap-align-start-10  px-10 overflow-x-hidden  w-[100%] ">
+      <div className="py-2 h-[80%] flex justify-center flex-col space-y-4">
+        <div className="flex space-x-4 items-center">
+          <div className="size-14 bg-gray-300 rounded-full"></div>
+          <div>
+            <h1 className="text-xl font-itim">Developer.</h1>
+          </div>
+        </div>
+        <div className="space-y-3 text-sm ">
+          <p className="font-itim text-gray-700 text-wrap leading-5 pr-4 ">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. A pariatur
+            corrupti maiores, aliquam consequuntur vero culpa quam eaque
+          </p>
+          <p className="font-itim text-gray-950">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
+        </div>
+        {/* skills */}
+        <div className="flex w-[70vw] pt-5 gap-x-2 gap-y-1 justify-starts flex-wrap ">
+          {skills.map((skill, i) => (
+            <div
+              key={i}
+              draggable
+              onDragEnter={(e) => {
+                isDragging ? dragEnter(e, { group_idx: 0, item_idx: i }) : null;
+              }}
+              onDragStart={(e) => dragStart(e, { group_idx: 0, item_idx: i })}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(-1)}
+              className="rounded-full flex justify-center items-center size-8 relative bg-gray-100"
+            >
+              <Image
+                height={20}
+                alt={skill.language}
+                width={20}
+                src={skill.image}
+              />
+              {i === hoveredSkill && (
+                <motion.div
+                  initial={{ y: 5, opacity: 0.2 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  className="absolute  min-w-[200%] h-full top-full -left-[50%] text-sm text-[#111] font-itim text-center"
+                >
+                  <div className="flex justify-center">
+                    <FaArrowUp />
+                  </div>
+                  <p className="capitalize text-nowrap ">{skill.language}</p>
+                </motion.div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Projects() {
+  return (
+    <div className="h-full pt-[10%] w-full snap-align-start-10  bg-slate-200">
+      <div className="h-full px-5 pr-10 ">
+        {[1, 2, 3].map((item, i) => (
+          <div
+            key={i}
+            style={{ boxShadow: "0 0 10px 1px #c2c2c2" }}
+            className="w-full  rounded-md mt-2"
+          >
+            <div className="flex space-x-2">
+              <div className="w-[70%]">
+                <p className="text-sm px-4 py-3 leading-5 ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ducimus necessitatibus molestiae dolore magnam accusamus dolor
+                  consequuntur eaque maiores repellat velit!
+                </p>
+              </div>
+              <div className="w-[30%]"></div>
+            </div>
+            <div className="w-full flex gap-x-2 py-2 px-4">
+              {/* tech skill's */}
+              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
+                <p className="capitalize text-sm">node js</p>
+              </div>
+              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
+                <p className="capitalize text-sm">javascript</p>
+              </div>
+              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
+                <p className="capitalize text-sm">react js</p>
+              </div>
+              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
+                <p className="capitalize text-sm">next js</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Experience() {
+  return (
+    <div className="h-full pt-[10%] w-full snap-align-start-10  bg-slate-200">
+      <div className="h-full px-5 pr-10 ">
+        {[1, 2, 3].map((item, i) => (
+          <div
+            key={i}
+            style={{ boxShadow: "0 0 10px 1px #c2c2c2" }}
+            className="w-full  rounded-md mt-2"
+          >
+            <div className="flex space-x-2">
+              <div className="w-[70%]">
+                <p className="text-sm px-4 py-3 leading-5 ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ducimus necessitatibus molestiae dolore magnam accusamus dolor
+                  consequuntur eaque maiores repellat velit!
+                </p>
+              </div>
+              <div className="w-[30%]"></div>
+            </div>
+            <div className="w-full flex gap-x-2 py-2 px-4">
+              {/* tech skill's */}
+              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
+                <p className="capitalize text-sm">node js</p>
+              </div>
+              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
+                <p className="capitalize text-sm">javascript</p>
+              </div>
+              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
+                <p className="capitalize text-sm">react js</p>
+              </div>
+              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
+                <p className="capitalize text-sm">next js</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

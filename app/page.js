@@ -12,6 +12,5 @@ export default function Home() {
         <Page2 />
       </div>
     </>
-    // <Home/>
   );
 }
