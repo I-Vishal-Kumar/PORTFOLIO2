@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
 import { gsap } from "gsap";
 
-export const Page1 = () => {
+export const Page2 = () => {
   const skillRef = useRef();
   const [svgHeight, updateSvgHeight] = useState("100vh");
   useEffect(() => {

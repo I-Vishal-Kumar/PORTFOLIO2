@@ -31,3 +31,29 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Targets the scrollbar itself */
+::-webkit-scrollbar {
+  width: 12px;
+  border-radius: 100%;
+  /* height: 100%; */
+}
+.snap-align-start-10 {
+  scroll-snap-align: start;
+  /* margin-top: 10vh; 10% of the viewport height */
+}
+
+/* Targets the draggable part of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(255 194 102 / 0.6);
+  border-radius: 10px;
+  border: 0.1px solid rgb(238, 182, 79 / 0.5);
+  /* box-shadow: 0 0 10px 1px rgb(154, 154, 154); */
+}
+
+/* Targets the buttons on the scrollbar (arrows pointing upwards and downwards) */
+::-webkit-scrollbar-button {
+  display: block;
+  height: none; /* or 'none' to remove them */
+  /* background-color: #d22727; */
+}
