@@ -4,9 +4,62 @@ import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { FaArrowUp } from "react-icons/fa6";
 import { motion } from "framer-motion";
-// import ScrollMagic from "scrollmagic";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import MotionPathPlugin from "gsap/MotionPathPlugin";
+
+const leafPaths = [
+  "M111 108C111 108 153.504 72.1643 191.5 52.5C225.441 34.9342 241.058 33.2932 278 23.5C340.023 7.05785 396.304 21.8119 457 1C501.194 -14.1536 560.5 -59 560.5 -59",
+  "M0.5 231C0.5 231 61.3986 187.724 105 169C175.761 138.612 199.65 147.964 276.5 143C314.887 140.52 366.848 154.886 397 131C417.261 114.949 441.839 94.564 457.5 74C506.024 10.2843 565.771 40.0467 621 5.5C655.763 -16.2445 701 -62.5 701 -62.5",
+  "M263 62.5C263 62.5 321.599 63.9373 349.5 43.5C368.124 29.8583 371.427 14.9046 386 -3C404.624 -25.8816 435 -60.5 435 -60.5",
+  "M519.5 118C519.5 118 582.25 107.883 620 93.5C663.208 77.0377 690.752 68.6418 723.5 36C745.787 13.7859 746.065 -8.95538 769 -30.5C785.382 -45.889 816.5 -63 816.5 -63",
+  "M839.5 63.5C839.5 63.5 863.565 36.3609 880.5 20.5C901.267 1.05011 920.984 -1.9828 937 -25.5C945.751 -38.3506 954 -61.5 954 -61.5",
+  "M718.5 197.5C718.5 197.5 770.28 181.798 804 146.5C819.526 130.248 843.251 98.9881 860 84C891.769 55.5716 924.359 62.6408 954 32C978.226 6.95699 968.133 -24.722 994.5 -47.5C1002.04 -54.0151 1015.5 -62 1015.5 -62",
+  "M308 160C308 160 356.034 118.964 372.5 92.5C400.5 47.5 474.5 24 474.5 24L574.5 -17.5",
+  "M297 364C297 364 376.207 298.336 433.073 267.446C485.887 238.758 527.942 248.499 574.916 209.925C616.631 175.669 657.137 95.9094 657.137 95.9094L757.629 -1.67141L811 -33",
+];
 
 export const Page1 = () => {
+  useEffect(() => {
+    gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
+    leafPaths.forEach((path, idx) => {
+      gsap.to(`#leaf${idx + 1}`, {
+        duration: 3,
+        ease: "power1.inOut",
+        motionPath: {
+          path: path,
+          alignOrigin: [0.5, 0.5],
+          autoRotate: true,
+          start: 1,
+          end: 0.1,
+        },
+        stagger: 3,
+      });
+      const tl = new gsap.timeline({
+        scrollTrigger: {
+          trigger: `#trigger`,
+          start: "top center",
+          scroller: "#scroller",
+          end: "bottom center",
+          scrub: true,
+          markers: false,
+        },
+      });
+      tl.to(`#leaf${idx + 1}`, {
+        duration: 3,
+        ease: "power1.inOut",
+        motionPath: {
+          path: path,
+          alignOrigin: [0.5, 0.5],
+          autoRotate: true,
+          start: 0.5,
+          end: 0.1,
+        },
+        stagger: 3,
+      });
+    });
+  }, [leafPaths]);
+
   return (
     <main className="w-full h-[100dvh] relative overflow-hidden text-[#000] bg-[#FFC266] flex justify-center items-center">
       <div
@@ -218,7 +271,10 @@ export const Page1 = () => {
           </div>
         </section>
         {/* main contents */}
-        <section className="rounded-sm snap-y snap-mandatory relative bg-slate-200 h-[95%] overflow-y-scroll w-[65%]">
+        <section
+          id="scroller"
+          className="rounded-sm snap-y snap-mandatory relative bg-slate-200 h-[95%] overflow-y-scroll w-[65%]"
+        >
           {/* header */}
           <div className=" sticky h-[9%] py-2 w-full flex justify-center text-center top-0 left-0">
             <h2
@@ -231,7 +287,17 @@ export const Page1 = () => {
           {/* main items */}
           <About />
           <Projects />
-          <div className="h-full pt-[10%] w-full snap-align-start-10  bg-blue-200"></div>
+          <div
+            id="trigger"
+            className="h-full pt-[10%] w-full snap-align-start-10   flex justify-center items-center"
+          >
+            <Image
+              src={"/skillTree.svg"}
+              alt="skilltree"
+              height={400}
+              width={400}
+            />
+          </div>
           <Experience />
 
           {/* scrollbar decors */}
@@ -261,6 +327,205 @@ export const Page1 = () => {
       <div className="size-14 translate-x-2 -translate-y-2 rounded-full absolute top-0 right-0 bg-orange-400 flex items-center justify-center">
         <div className="bg-white rounded-full size-7 mr-2 mt-2 "></div>
       </div>
+      {/* leaf decoration */}
+      <svg
+        width="90vw"
+        height="60vh"
+        fill="none"
+        className="absolute pointer-events-none top-0 z-[1] "
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g className="z-[100]" id="leaf1">
+          <svg width="36" height="25" viewBox="0 0 36 25" fill="none">
+            <path
+              style={{ transformOrigin: "center", scale: "0.7" }}
+              className="rotate-[-150deg]"
+              d="M32.2107 3.69421C30.2405 4.2436 29.1749 5.22907 26.832 5.22907C24.7973 5.22907 24.4286 4.07727 22.9907 3.11503C19.7514 0.947252 14.4784 2.20244 11.5679 4.63714C8.30904 7.36327 5.85625 9.73747 3.97033 13.5832C1.95826 17.6862 2.00007 18.63 2.00007 22.9228C2.00007 23.7226 8.7891 18.0678 10.2095 16.8796C11.6871 15.6435 14.15 13.5832 16.777 13.5832C18.7473 13.5832 20.2636 13.165 22.3594 13.0339C23.3446 12.9722 24.9865 11.2219 24.9865 10.2869C24.9865 9.23624 26.4897 6.23884 27.9418 5.89177C29.4236 5.53762 30.8972 4.15408 32.2107 3.69421ZM32.2107 3.69421C34.7578 2.58268 34.4294 2.30798 32.2107 3.69421Z"
+              stroke="#52FF4F"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </svg>
+        </g>
+        <g className="z-[100]" id="leaf2">
+          <svg
+            width="38"
+            height="28"
+            viewBox="0 0 38 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              style={{ transformOrigin: "center", scale: "0.7" }}
+              className="rotate-[-150deg]"
+              d="M34.0989 3.93624C32.0055 4.56412 30.8734 5.69037 28.384 5.69037C26.2222 5.69037 25.8304 4.37403 24.3026 3.27432C20.8609 0.796859 15.2583 2.23136 12.1659 5.01388C8.70335 8.12945 6.09726 10.8428 4.09347 15.238C1.95566 19.927 2.00007 21.0057 2.00007 25.9118C2.00007 26.8259 9.21342 20.3632 10.7226 19.0052C12.2925 17.5926 14.9094 15.238 17.7006 15.238C19.794 15.238 21.4051 14.7601 23.6319 14.6101C24.6786 14.5396 26.4231 12.5394 26.4231 11.4707C26.4231 10.27 28.0203 6.84439 29.5632 6.44774C31.1376 6.04299 32.7033 4.4618 34.0989 3.93624ZM34.0989 3.93624C36.8051 2.66592 36.4562 2.35198 34.0989 3.93624Z"
+              stroke="#52FF4F"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </svg>
+        </g>
+        <g className="z-[100]" id="leaf3">
+          <svg
+            width="34"
+            height="17"
+            viewBox="0 0 34 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              style={{ transformOrigin: "center", scale: "0.7" }}
+              className="rotate-[-150deg]"
+              d="M11.3737 8.60302C8.70718 7.07893 4.36395 5.66454 1.69747 4.14045C0.916642 3.69414 6.3963 1.83013 8.25399 1.80392C10.3009 1.77504 10.4045 1.90756 11.4278 2.01567C12.8259 2.16337 13.9882 2.5735 16.0656 4.37634C16.4611 4.89258 17.9038 6.61968 18.2557 7.242C19.2898 9.07058 22.9507 10.5108 24.7402 10.9484C26.1092 11.2831 27.9182 10.5355 29.2024 11.2695C30.4876 12.0041 35.0752 10.3865 28.5382 12.4922C27.922 13.095 27.0587 13.6922 26.1344 13.9463C25.0777 14.2369 24.4156 14.8724 23.093 15.1622C20.0965 15.8188 18.8466 15.3823 16.1751 13.8554C13.6982 12.4396 13.7155 9.94155 11.3737 8.60302Z"
+              stroke="#67FF4F"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </svg>
+        </g>
+        <g className="z-[100]" id="leaf4">
+          <svg
+            width="25"
+            height="26"
+            viewBox="0 0 25 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              style={{ transformOrigin: "center", scale: "0.7" }}
+              className="rotate-[-150deg]"
+              d="M24 1C22.9083 1.97357 21.7857 2.18003 21.0809 2.44092C19.5181 3.01954 20.4902 3.11832 19.1349 3.88184C18.0495 4.49334 16.9519 4.34181 16.2159 5.32277C15.7293 5.9713 14.6656 5.73342 13.8521 6.17963C12.7298 6.79515 11.8636 6.26547 10.4689 6.3171C9.15655 6.36569 6.79528 6.73996 5.82727 7.41689C3.30843 9.17832 1 10.9745 1 13.7101C1 17.0489 1.12494 20.3966 2.15525 23.6387C2.34429 24.2336 2.67098 25.8262 2.67098 24.4636C2.67098 23.5472 3.57405 21.831 4.42447 21.1642C6.37814 19.6325 8.43173 17.5706 10.4689 16.1297C11.7817 15.2011 12.2681 14.957 13.0682 14.2906C13.8881 13.6075 14.1822 12.7143 14.1822 11.816C14.1822 10.8337 14.3678 9.91934 14.3678 8.9291C14.3678 8.45552 14.2192 8.02122 14.1822 7.55436C14.1722 7.42882 13.6954 7.00447 13.9965 7.00447"
+              stroke="url(#paint0_linear_5_256)"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <defs>
+              <linearGradient
+                id="paint0_linear_5_256"
+                x1="22.054"
+                y1="0.999999"
+                x2="11.5053"
+                y2="14.2967"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0.0012632" stopColor="#FB951D" />
+                <stop offset="1" stopColor="#8CF820" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </g>
+        <g className="z-[100]" id="leaf5">
+          <svg
+            width="34"
+            height="15"
+            viewBox="0 0 34 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              style={{ transformOrigin: "center", scale: "0.7" }}
+              className="rotate-[-150deg]"
+              d="M13.1626 10.8655C10.0959 11.0338 5.68079 12.2047 2.61408 12.373C1.71605 12.4223 5.30505 7.8813 6.8507 6.85046C8.55384 5.7146 8.71274 5.76966 9.63074 5.30471C10.885 4.66948 12.0837 4.38265 14.807 4.7684C15.4195 4.98709 17.5688 5.65387 18.2023 5.98531C20.0637 6.95918 23.9199 6.18046 25.6601 5.5761C26.9914 5.11374 28.1044 3.5036 29.5814 3.42256C31.0595 3.34146 34.0333 -0.508186 29.6877 4.80994C29.4976 5.65073 29.0969 6.62105 28.4588 7.33634C27.7293 8.15415 27.5185 9.04734 26.5653 10.0089C24.4057 12.1876 23.1191 12.4999 20.0467 12.6684C17.1979 12.8248 15.8559 10.7177 13.1626 10.8655Z"
+              stroke="#67FF4F"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </svg>
+        </g>
+        <g className="z-[100]" id="leaf6">
+          <svg
+            width="25"
+            height="26"
+            viewBox="0 0 25 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              style={{ transformOrigin: "center", scale: "0.7" }}
+              className="rotate-[-150deg]"
+              d="M24 1C22.9083 1.97357 21.7857 2.18003 21.0809 2.44092C19.5181 3.01954 20.4902 3.11832 19.1349 3.88184C18.0495 4.49334 16.9519 4.34181 16.2159 5.32277C15.7293 5.9713 14.6656 5.73342 13.8521 6.17963C12.7298 6.79515 11.8636 6.26547 10.4689 6.3171C9.15655 6.36569 6.79528 6.73996 5.82727 7.41689C3.30843 9.17832 1 10.9745 1 13.7101C1 17.0489 1.12494 20.3966 2.15525 23.6387C2.34429 24.2336 2.67098 25.8262 2.67098 24.4636C2.67098 23.5472 3.57405 21.831 4.42447 21.1642C6.37814 19.6325 8.43173 17.5706 10.4689 16.1297C11.7817 15.2011 12.2681 14.957 13.0682 14.2906C13.8881 13.6075 14.1822 12.7143 14.1822 11.816C14.1822 10.8337 14.3678 9.91934 14.3678 8.9291C14.3678 8.45552 14.2192 8.02122 14.1822 7.55436C14.1722 7.42882 13.6954 7.00447 13.9965 7.00447"
+              stroke="url(#paint0_linear_5_256)"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <defs>
+              <linearGradient
+                id="paint0_linear_5_256"
+                x1="22.054"
+                y1="0.999999"
+                x2="11.5053"
+                y2="14.2967"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0.0012632" stopColor="#FB951D" />
+                <stop offset="1" stopColor="#8CF820" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </g>
+        <g className="z-[100]" id="leaf7">
+          <svg
+            width="25"
+            height="26"
+            viewBox="0 0 25 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              style={{ transformOrigin: "center", scale: "0.7" }}
+              className="rotate-[-150deg]"
+              d="M24 1C22.9083 1.97357 21.7857 2.18003 21.0809 2.44092C19.5181 3.01954 20.4902 3.11832 19.1349 3.88184C18.0495 4.49334 16.9519 4.34181 16.2159 5.32277C15.7293 5.9713 14.6656 5.73342 13.8521 6.17963C12.7298 6.79515 11.8636 6.26547 10.4689 6.3171C9.15655 6.36569 6.79528 6.73996 5.82727 7.41689C3.30843 9.17832 1 10.9745 1 13.7101C1 17.0489 1.12494 20.3966 2.15525 23.6387C2.34429 24.2336 2.67098 25.8262 2.67098 24.4636C2.67098 23.5472 3.57405 21.831 4.42447 21.1642C6.37814 19.6325 8.43173 17.5706 10.4689 16.1297C11.7817 15.2011 12.2681 14.957 13.0682 14.2906C13.8881 13.6075 14.1822 12.7143 14.1822 11.816C14.1822 10.8337 14.3678 9.91934 14.3678 8.9291C14.3678 8.45552 14.2192 8.02122 14.1822 7.55436C14.1722 7.42882 13.6954 7.00447 13.9965 7.00447"
+              stroke="url(#paint0_linear_5_256)"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <defs>
+              <linearGradient
+                id="paint0_linear_5_256"
+                x1="22.054"
+                y1="0.999999"
+                x2="11.5053"
+                y2="14.2967"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0.0012632" stopColor="#FB951D" />
+                <stop offset="1" stopColor="#8CF820" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </g>
+        <g className="z-[100]" id="leaf8">
+          <svg
+            width="25"
+            height="26"
+            viewBox="0 0 25 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              style={{ transformOrigin: "center", scale: "0.7" }}
+              className="rotate-[-150deg]"
+              d="M24 1C22.9083 1.97357 21.7857 2.18003 21.0809 2.44092C19.5181 3.01954 20.4902 3.11832 19.1349 3.88184C18.0495 4.49334 16.9519 4.34181 16.2159 5.32277C15.7293 5.9713 14.6656 5.73342 13.8521 6.17963C12.7298 6.79515 11.8636 6.26547 10.4689 6.3171C9.15655 6.36569 6.79528 6.73996 5.82727 7.41689C3.30843 9.17832 1 10.9745 1 13.7101C1 17.0489 1.12494 20.3966 2.15525 23.6387C2.34429 24.2336 2.67098 25.8262 2.67098 24.4636C2.67098 23.5472 3.57405 21.831 4.42447 21.1642C6.37814 19.6325 8.43173 17.5706 10.4689 16.1297C11.7817 15.2011 12.2681 14.957 13.0682 14.2906C13.8881 13.6075 14.1822 12.7143 14.1822 11.816C14.1822 10.8337 14.3678 9.91934 14.3678 8.9291C14.3678 8.45552 14.2192 8.02122 14.1822 7.55436C14.1722 7.42882 13.6954 7.00447 13.9965 7.00447"
+              stroke="url(#paint0_linear_5_256)"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <defs>
+              <linearGradient
+                id="paint0_linear_5_256"
+                x1="22.054"
+                y1="0.999999"
+                x2="11.5053"
+                y2="14.2967"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0.0012632" stopColor="#FB951D" />
+                <stop offset="1" stopColor="#8CF820" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </g>
+      </svg>
     </main>
   );
 };
@@ -368,7 +633,7 @@ function About() {
               onDragStart={(e) => dragStart(e, { group_idx: 0, item_idx: i })}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(-1)}
-              className="rounded-full flex justify-center items-center size-8 relative bg-gray-100"
+              className="rounded-full cursor-grab flex justify-center items-center size-8 relative bg-gray-100"
             >
               <Image
                 height={20}
@@ -399,12 +664,12 @@ function About() {
 function Projects() {
   return (
     <div className="h-full pt-[10%] w-full snap-align-start-10  bg-slate-200">
-      <div className="h-full px-5 pr-10 ">
+      <div className="h-full px-5 pr-10 flex flex-col justify-evenly mt-2">
         {[1, 2, 3].map((item, i) => (
           <div
             key={i}
             style={{ boxShadow: "0 0 10px 1px #c2c2c2" }}
-            className="w-full  rounded-md mt-2"
+            className="w-full  rounded-md "
           >
             <div className="flex space-x-2">
               <div className="w-[70%]">
@@ -441,7 +706,7 @@ function Projects() {
 function Experience() {
   return (
     <div className="h-full pt-[10%] w-full snap-align-start-10  bg-slate-200">
-      <div className="h-full px-5 pr-10 ">
+      <div className="h-full px-5 pr-10 flex flex-col justify-evenly ">
         {[1, 2, 3].map((item, i) => (
           <div
             key={i}

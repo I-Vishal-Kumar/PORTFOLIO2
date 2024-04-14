@@ -24,6 +24,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  cursor: url("/cursor_blue.png"), auto;
 }
 
 @layer utilities {
@@ -36,6 +37,7 @@ body {
 ::-webkit-scrollbar {
   width: 12px;
   border-radius: 100%;
+  /* cursor: auto; */
   /* height: 100%; */
 }
 .snap-align-start-10 {
@@ -47,6 +49,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: rgb(255 194 102 / 0.6);
   border-radius: 10px;
+  cursor: grab;
   border: 0.1px solid rgb(238, 182, 79 / 0.5);
   /* box-shadow: 0 0 10px 1px rgb(154, 154, 154); */
 }
@@ -56,4 +59,13 @@ body {
   display: block;
   height: none; /* or 'none' to remove them */
   /* background-color: #d22727; */
+}
+
+@media (max-width: 770px) {
+  ::-webkit-scrollbar {
+    width: 1px;
+    border-radius: 100%;
+    /* cursor: auto; */
+    /* height: 100%; */
+  }
 }
