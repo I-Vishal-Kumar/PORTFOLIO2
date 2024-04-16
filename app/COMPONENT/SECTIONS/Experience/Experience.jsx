@@ -1,8 +1,11 @@
+import Link from "next/link";
+import Outro from "../OUTRO/Outro";
+import { motion } from "framer-motion";
 export default function Experience() {
   return (
-    <div className="h-full pt-[10%] w-full snap-align-start-10  bg-slate-200">
-      <div className="h-full px-5 pr-10 flex flex-col justify-evenly ">
-        {[1, 2, 3].map((item, i) => (
+    <div className="h-full pt-[10%] pb-4 w-full snap-align-start-10  bg-slate-200">
+      <div className="h-full px-5 pr-10 flex flex-col justify-between ">
+        {[1].map((item, i) => (
           <div
             key={i}
             style={{ boxShadow: "0 0 10px 1px #c2c2c2" }}
@@ -35,6 +38,27 @@ export default function Experience() {
             </div>
           </div>
         ))}
+        {/* outro */}
+        <motion.div
+          whileInView={{ visibility: "visible" }}
+          initial={{ visibility: "hidden" }}
+          className=" font-itim text-[0.9rem]  mt-1"
+        >
+          <Outro
+            text={
+              "Thank's for reaching the bottom of this page. If you like what you see, let's connect and build something together."
+            }
+          />
+          <p className="text-sm">
+            Alternatively, here&apos;s a fancy sheet of paper.
+            <Link
+              className="text-blue-600 text-[1.1rem] ml-2 underline"
+              href={"#"}
+            >
+              Resume
+            </Link>
+          </p>
+        </motion.div>
       </div>
     </div>
   );

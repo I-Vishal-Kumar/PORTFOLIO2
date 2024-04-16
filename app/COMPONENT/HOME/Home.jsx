@@ -8,9 +8,28 @@ import Experience from "../SECTIONS/Experience/Experience";
 import { motion } from "framer-motion";
 import LeafDecor from "../DECORATIONS/LeafDecor";
 
-export const Page1 = () => {
-  const [activeSection, setActiveSection] = useState("about");
+const accentColor = {
+  spring: { bg: "#F94994", accent: "#F8B3EC" },
+  summer: { bg: "#97EC79", accent: "#B3E77D" },
+  autumn: { bg: "#FFC266", accent: "#ffc26699" },
+  winter: { bg: "#5C4FC0", accent: "#CDF0FF" },
+};
 
+const settingContainer = {
+  hidden: { opacity: 1 },
+  visible: {
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+export const Page1 = ({ season }) => {
+  const [activeSection, setActiveSection] = useState("about");
+  const [currentSeason, setSeason] = useState(season);
+
+  const [setting, setSetting] = useState(false);
   const sectionRefs = useRef([]);
 
   useEffect(() => {
@@ -39,11 +58,12 @@ export const Page1 = () => {
     sectionRefs.current.forEach((ref) => {
       observer.observe(ref);
     });
-
+    setSeason(season);
+    // console.log("seson", currentSeason);
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [season]);
 
   function ScrollTo(id) {
     // console.log(activeSection);
@@ -52,11 +72,25 @@ export const Page1 = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   }
+  function changeTheme(season) {
+    setSeason(season);
+    const htmlElement = document.querySelector("html");
+    htmlElement.setAttribute("data-theme", season.toString());
+    setSetting(false);
+  }
 
   return (
-    <main className="w-full h-[100dvh] relative overflow-hidden text-[#000] bg-[#FFC266] flex justify-center items-center">
+    <main
+      style={{
+        backgroundColor: accentColor[currentSeason]?.bg,
+      }}
+      className="w-full h-[100dvh] relative overflow-hidden bg-slate-300 text-[#000] flex justify-center items-center"
+    >
       <div
-        style={{ boxShadow: "0 0 10px 1px gray" }}
+        style={{
+          boxShadow: "0 0 10px 1px gray",
+          filter: setting ? "blur(3px)" : "",
+        }}
         className="h-[90%] relative w-[90%] overflow-hidden rounded-md p-4 flex justify-between items-center gap-x-5 bg-slate-100"
       >
         {/* about me */}
@@ -318,64 +352,137 @@ export const Page1 = () => {
         {/* navigation */}
         <section className="rounded-sm bg-slate-200 h-[95%] gap-y-5 flex flex-col justify-center w-[10%]">
           <motion.div
-            initial={{ background: "#c6c6c6", opacity: 0.7 }}
-            transition={{ duration: 2, ease: "easeOut", type: "spring" }}
+            initial={{ background: "#e2e8f0", opacity: 0.7 }}
+            transition={{ duration: 1.25, ease: "easeOut", type: "spring" }}
             animate={
               activeSection === "about"
-                ? { background: "blue", opacity: 1 }
+                ? { background: "#cbd5e1", opacity: 1 }
                 : {}
             }
-            // style={{
-            //   background: activeSection === "about" ? "blue" : "#c6c6c6",
-            // transition: "all ease 0.2s",
-            // }}
             onClick={(e) => ScrollTo("about")}
-            className="w-full flex justify-center  items-center bg-slate-3000 flex-col aspect-square"
+            className="w-full   flex justify-center  items-center bg-slate-300 flex-col aspect-square"
           >
-            <div className="size-10 bg-slate-50"></div>
+            <div className="size-10 flex justify-center items-center">
+              <Image src={"/about.png"} alt="about" height={20} width={20} />
+            </div>
             <p className="font-itim capitalize pt-2 text-sm">about</p>
           </motion.div>
-          <div
+          <motion.div
             onClick={(e) => ScrollTo("project")}
-            style={{
-              background: activeSection === "project" ? "blue" : "#c6c6c6",
-              transition: "all ease 0.2s",
-            }}
+            initial={{ background: "#e2e8f0", opacity: 0.7 }}
+            transition={{ duration: 1.25, ease: "easeOut", type: "spring" }}
+            animate={
+              activeSection === "project"
+                ? { background: "#cbd5e1", opacity: 1 }
+                : {}
+            }
             className="w-full flex justify-center items-center bg-slate-3000 flex-col aspect-square"
           >
-            <div className="size-10 bg-slate-50"></div>
+            <div className="size-10 flex justify-center items-center">
+              <Image src={"/projects.png"} alt="about" height={20} width={20} />
+            </div>
             <p className="font-itim capitalize pt-2 text-sm">projects</p>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             onClick={(e) => ScrollTo("skills")}
-            style={{
-              background: activeSection === "skills" ? "blue" : "#c6c6c6",
-            }}
+            initial={{ background: "#e2e8f0", opacity: 0.7 }}
+            transition={{ duration: 1.25, ease: "easeOut", type: "spring" }}
+            animate={
+              activeSection === "skills"
+                ? { background: "#cbd5e1", opacity: 1 }
+                : {}
+            }
             className="w-full flex justify-center items-center bg-slate-3000 flex-col aspect-square"
           >
-            <div className="size-10 bg-slate-50"></div>
+            <div className="size-10 flex justify-center items-center  ">
+              <Image src={"/skill.png"} alt="about" height={24} width={24} />
+            </div>
             <p className="font-itim capitalize pt-2 text-sm">skills</p>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             onClick={(e) => ScrollTo("experience")}
-            style={{
-              background: activeSection === "experience" ? "blue" : "#c6c6c6",
-            }}
+            initial={{ background: "#e2e8f0", opacity: 0.7 }}
+            transition={{ duration: 1.25, ease: "easeOut", type: "spring" }}
+            animate={
+              activeSection === "experience"
+                ? { background: "#cbd5e1", opacity: 1 }
+                : {}
+            }
             className="w-full flex justify-center items-center bg-slate-3000 flex-col aspect-square"
           >
-            <div className="size-10 bg-slate-50"></div>
+            <div className="size-10 flex justify-center items-center">
+              <Image
+                src={"/experience.png"}
+                alt="about"
+                height={20}
+                width={20}
+              />
+            </div>
             <p className="font-itim capitalize pt-2 text-sm">Experience</p>
-          </div>
+          </motion.div>
         </section>
       </div>
       {/* Theme changing icon */}
-      <div className="size-14 translate-x-2 -translate-y-2 rounded-full absolute top-0 right-0 bg-orange-400 flex items-center justify-center">
-        <div className="bg-white rounded-full size-7 mr-2 mt-2 "></div>
+      <div className="rounded-full absolute flex-col top-0 right-0 flex items-end gap-y-2 pr-2 justify-center">
+        <div
+          onClick={(e) => {
+            setSetting((prev) => !prev);
+          }}
+          className="bg-white rounded-full flex justify-center items-center size-7 mt-2 "
+        >
+          <svg viewBox="0 0 32 32" width="18" height="18">
+            <path
+              d="m30 13.2-3-.9c-.1-.4-.3-.8-.5-1.2l1.8-2.7c.3-.4.2-.9-.1-1.2L25 4c-.3-.3-.8-.4-1.1-.2l-2.8 1.5c-.4-.2-.8-.4-1.2-.5l-.6-3.2c-.1-.3-.5-.6-.9-.6h-4.6c-.4 0-.8.3-.9.7l-.9 3c-.4.1-.8.3-1.2.5L8.2 3.4c-.4-.3-.9-.2-1.2.1L3.8 6.7c-.3.3-.4.8-.2 1.2l1.5 2.8c-.1.3-.3.7-.5 1.1l-3.2.6c-.4.1-.8.5-.8.9v4.6c0 .4.3.8.7.9l3 .9c.1.4.3.8.5 1.2L3 23.6c-.3.4-.2.9.1 1.2L6.5 28c.2.2.4.3.7.3.2 0 .3 0 .5-.1l2.8-1.5c.4.2.8.4 1.2.5l.6 3.2c.1.4.5.8.9.8h4.6c.4 0 .8-.3.9-.7l.9-3c.4-.1.8-.3 1.2-.5l2.7 1.8c.2.1.3.2.5.2s.5-.1.7-.3l3.2-3.2c.3-.3.4-.8.2-1.1l-1.5-2.8c.2-.4.4-.8.5-1.2l3.2-.6c.4-.1.8-.5.8-.9v-4.6c-.4-.6-.7-1-1.1-1.1zm-1.2 4.7-1.5.3-1.3.2c-.1 0-.2.1-.3.1-.3 1.1-.7 2.1-1.4 3.1 0 .1.1.2.1.3l.7 1.3.7 1.2-2.2 2.2-1.2-.8-1.2-.8c-.1-.1-.2-.1-.3-.1-1 .6-2 1-3.1 1.2-.1.1-.1.2-.1.3l-.4 1.4-.4 1.4h-3.1l-.3-1.5-.3-1.4c0-.1-.1-.2-.1-.3-1.1-.3-2.1-.8-3.1-1.4-.1 0-.2.1-.3.1l-1.3.7-1.2.7L5 23.9l.8-1.2.8-1.2c.1-.1.1-.2.1-.3-.6-1-1-2-1.2-3.1.1-.1 0-.1-.1-.1L4 17.6l-1.4-.4v-3.1l1.5-.3 1.4-.3c.1 0 .2-.1.3-.1.3-1.1.7-2.1 1.4-3.1 0-.1-.1-.2-.1-.3l-.8-1.2-.7-1.2 2.2-2.2 1.2.8 1.2.8c.1.1.2.1.3.1 1-.6 2-1 3.1-1.2.1-.1.1-.2.1-.3l.4-1.4.4-1.4h3.1l.3 1.5.3 1.4c0 .1.1.2.1.3 1.1.3 2.1.7 3.1 1.4.1 0 .2-.1.3-.1l1.3-.7 1.2-.7 2.2 2.2-.8 1.2-.8 1.2c-.1.1-.1.2-.1.3.6 1 1 2 1.2 3.1 0 .1.1.1.1.1l1.4.4 1.4.4v3.1z"
+              fill="#000000"
+              className="color000 svgShape"
+            ></path>
+            <path
+              d="M15.7 9.5c-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5c.1-3.6-2.9-6.5-6.5-6.5zm0 11.2c-2.6 0-4.7-2.1-4.7-4.7s2.1-4.7 4.7-4.7 4.7 2.1 4.7 4.7-2.1 4.7-4.7 4.7z"
+              fill="#000000"
+              className="color000 svgShape"
+            ></path>
+          </svg>
+        </div>
+        {setting && (
+          <motion.div
+            variants={settingContainer}
+            initial="hidden"
+            className="space-y-2 flex flex-col items-end"
+            animate="visible"
+          >
+            {["spring", "winter", "summer", "autumn"].map((ele, idx) => (
+              <motion.div
+                onClick={(e) => changeTheme(ele)}
+                key={`setting-${idx}`}
+                variants={{
+                  hidden: { x: 20, opacity: 0 },
+                  visible: {
+                    x: 0,
+                    opacity: 1,
+                  },
+                }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ staggerChildren: 0.2 }}
+                className="  items-center relative font-itim text-sm space-x-1 flex"
+              >
+                <p className="capitalize">{ele}</p>
+                <div
+                  style={{
+                    boxShadow: "0 0 10px 1px inherit",
+                    backgroundColor: accentColor[ele].bg,
+                  }}
+                  className="size-7 rounded-full "
+                ></div>
+                {ele === currentSeason && (
+                  <p className="size-2 absolute top-1/2 -translate-y-1/2 -left-4 bg-[#fb2323] rounded-full"></p>
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
       {/* leaf decoration */}
-      <LeafDecor />
-      {/* dustbin */}
-      <div className="absolute bottom-0 left-0 size-10 bg-blue-300"></div>
+      <LeafDecor season={currentSeason} />
     </main>
   );
 };

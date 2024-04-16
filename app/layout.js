@@ -22,7 +22,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" data-theme="hey">
       <head>
         <meta name="theme-color" content="#fafafa" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
