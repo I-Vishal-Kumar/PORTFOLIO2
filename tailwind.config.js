@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        customShadow: "rgb(215 210 210) 0 0 10px 1px",
+      },
       fontFamily: {
         caveat: ["var(--font-caveat)"],
         itim: ["var(--font-itim)"],

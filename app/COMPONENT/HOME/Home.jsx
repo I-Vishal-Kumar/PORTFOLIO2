@@ -7,9 +7,10 @@ import Projects from "../SECTIONS/Project/Projects";
 import Experience from "../SECTIONS/Experience/Experience";
 import { motion } from "framer-motion";
 import LeafDecor from "../DECORATIONS/LeafDecor";
+import Guage from "../SECTIONS/Guage/Guage";
 
 const accentColor = {
-  spring: { bg: "#F94994", accent: "#F8B3EC" },
+  spring: { bg: "#F94994", accent: "#fdaef0" },
   summer: { bg: "#97EC79", accent: "#B3E77D" },
   autumn: { bg: "#FFC266", accent: "#ffc26699" },
   winter: { bg: "#5C4FC0", accent: "#CDF0FF" },
@@ -88,7 +89,7 @@ export const Page1 = ({ season }) => {
     >
       <div
         style={{
-          boxShadow: "0 0 10px 1px gray",
+          boxShadow: "0 0 10px 1px #626262",
           filter: setting ? "blur(3px)" : "",
         }}
         className="h-[90%] relative w-[90%] overflow-hidden rounded-md p-4 flex justify-between items-center gap-x-5 bg-slate-100"
@@ -106,26 +107,12 @@ export const Page1 = ({ season }) => {
                 style={{ boxShadow: "0 0 10px 0.5px #c6c6c6" }}
                 className="rounded-full hover:scale-[1.08] size-7 flex justify-center items-center bg-gray-200"
               >
-                <svg className="size-4" viewBox="0 0 28 48" version="1.1">
-                  <g
-                    id="Page-1"
-                    stroke="none"
-                    strokeWidth="1"
-                    fill="none"
-                    fillRule="evenodd"
-                  >
-                    <g
-                      id="Social-Icons---Isolated"
-                      transform="translate(-174.000000, -55.000000)"
-                      fill="blue"
-                    >
-                      <path
-                        d="M200.78439,55.3395122 L200.78439,62.9141463 L196.28878,62.9258537 C192.764878,62.9258537 192.085854,64.6 192.085854,67.0468293 L192.085854,72.4673171 L200.48,72.4673171 L199.39122,80.9434146 L192.085854,80.9434146 L192.085854,103 L183.329951,103 L183.329951,80.9434146 L176,80.9434146 L176,72.4673171 L183.329951,72.4673171 L183.329951,66.2156098 C183.329951,58.9570732 187.754146,55 194.24,55 C197.331902,55 200,55.2341463 200.78439,55.3395122 Z"
-                        id="Facebook"
-                      ></path>
-                    </g>
-                  </g>
-                </svg>
+                <Image
+                  src={"/skillIcons/github.svg"}
+                  height={20}
+                  width={20}
+                  alt="github"
+                />
               </div>
               <div
                 style={{ boxShadow: "0 0 10px 0.5px #c6c6c6" }}
@@ -279,22 +266,70 @@ export const Page1 = ({ season }) => {
             </div>
           </div>
           {/* leat code score's */}
-          <div className="mt-3 w-[90%] rounded-sm h-[10%] bg-gray-300">
-            <div className="w-[70%]"></div>
-            <div className="w-[30%]"></div>
+          <div className="mt-3 w-[90%] flex hover:shadow-customShadow items-center rounded-sm  h-[10%] bg-[#e4e6e9]">
+            <div className="w-[70%] text-xs pl-2 py-0.5 capitalize font-itim">
+              <p>Leetcode solution&apos;s</p>
+              <p className="text-[0.65rem]">outof 100 (correct)</p>
+            </div>
+            <div className="w-[30%] relative">
+              <Guage
+                percentage="44"
+                start={accentColor[currentSeason]?.accent}
+                stop={accentColor[currentSeason]?.accent}
+              />
+              <span className="absolute text-[0.6rem] font-semibold font-itim top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                44
+              </span>
+            </div>
           </div>
           {/* educations */}
-          <div className="mt-3 w-[90%] rounded-sm h-[10%] bg-gray-300">
-            <div className="w-[70%]"></div>
-            <div className="w-[30%]"></div>
+          <div className="mt-3 w-[90%] hover:shadow-customShadow flex items-center rounded-sm h-[10%] bg-[#e4e6e9]">
+            <div className="w-[70%] text-xs pl-2 py-0.5 capitalize font-itim">
+              <p>B-tech</p>
+              <p className="text-[0.65rem]">Bhagwati institute , Ghaziabad</p>
+            </div>
+            <div className="w-[30%] relative">
+              <Guage
+                percentage="75.6"
+                start={accentColor[currentSeason]?.accent}
+                stop={accentColor[currentSeason]?.accent}
+              />
+              <span className="absolute text-[0.6rem] font-semibold font-itim top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                75.6
+              </span>
+            </div>
           </div>
-          <div className="mt-3 w-[90%] rounded-sm h-[10%] bg-gray-300">
-            <div className="w-[70%]"></div>
-            <div className="w-[30%]"></div>
+          <div className="mt-3 w-[90%] hover:shadow-customShadow flex items-center rounded-sm h-[10%] bg-[#e4e6e9]">
+            <div className="w-[70%] text-xs pl-2 py-0.5 capitalize font-itim">
+              <p>secondary education</p>
+              <p className="text-[0.65rem]">D.A.V. public school , Jharkhand</p>
+            </div>
+            <div className="w-[30%] relative">
+              <Guage
+                percentage="82.3"
+                start={accentColor[currentSeason]?.accent}
+                stop={accentColor[currentSeason]?.accent}
+              />
+              <span className="absolute text-[0.6rem] font-semibold font-itim top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                82.3
+              </span>
+            </div>
           </div>
-          <div className="mt-3 w-[90%] rounded-sm h-[10%] bg-gray-300">
-            <div className="w-[70%]"></div>
-            <div className="w-[30%]"></div>
+          <div className="mt-3 w-[90%] hover:shadow-customShadow flex items-center rounded-sm h-[10%] bg-[#e4e6e9]">
+            <div className="w-[70%] text-xs pl-2 py-0.5 capitalize font-itim">
+              <p>secondary education</p>
+              <p className="text-[0.65rem]">D.A.V. public school , Jharkhand</p>
+            </div>
+            <div className="w-[30%] relative">
+              <Guage
+                percentage="76.8"
+                start={accentColor[currentSeason]?.accent}
+                stop={accentColor[currentSeason]?.accent}
+              />
+              <span className="absolute text-[0.6rem] font-semibold font-itim top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                76.8
+              </span>
+            </div>
           </div>
         </section>
         {/* main contents */}

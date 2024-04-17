@@ -61,7 +61,7 @@ body {
 }
 [data-theme="spring"] {
   ::-webkit-scrollbar-thumb {
-    background-color: #f8b3ec;
+    background-color: #fdaef0;
   }
 }
 [data-theme="summer"] {
@@ -79,6 +79,7 @@ body {
     background-color: #ffc26699;
   }
 }
+
 @media (max-width: 770px) {
   ::-webkit-scrollbar {
     width: 1px;

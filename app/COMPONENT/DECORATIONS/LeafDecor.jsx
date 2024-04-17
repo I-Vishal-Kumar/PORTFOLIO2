@@ -17,6 +17,12 @@ const leafPaths = [
 ];
 
 export default function LeafDecor({ season }) {
+  const [countdown, setCountdown] = useState(5);
+
+  const [hovering, setHovering] = useState(false);
+  function getMusic() {
+    console.log("ramp music");
+  }
   return (
     <>
       <svg
@@ -67,16 +73,57 @@ export default function LeafDecor({ season }) {
           d="M297 364C297 364 376.207 298.336 433.073 267.446C485.887 238.758 527.942 248.499 574.916 209.925C616.631 175.669 657.137 95.9094 657.137 95.9094L757.629 -1.67141L811 -33"
         />
 
-        {season === "autumn" && <AutumnSet />}
-        {season === "summer" && <SummerSet />}
-        {season === "winter" && <WinterSet />}
-        {season === "spring" && <SpringSet />}
+        {season === "autumn" && (
+          <AutumnSet
+            countdown={countdown}
+            setCountdown={setCountdown}
+            hovering={hovering}
+            setHovering={setHovering}
+            getMusic={getMusic}
+          />
+        )}
+        {season === "summer" && (
+          <SummerSet
+            countdown={countdown}
+            setCountdown={setCountdown}
+            hovering={hovering}
+            setHovering={setHovering}
+            getMusic={getMusic}
+          />
+        )}
+        {season === "winter" && (
+          <WinterSet
+            countdown={countdown}
+            setCountdown={setCountdown}
+            hovering={hovering}
+            setHovering={setHovering}
+            getMusic={getMusic}
+          />
+        )}
+        {season === "spring" && (
+          <SpringSet
+            countdown={countdown}
+            setCountdown={setCountdown}
+            hovering={hovering}
+            setHovering={setHovering}
+            getMusic={getMusic}
+          />
+        )}
       </svg>
+      {hovering && (
+        <span className="absolute top-0 font-bold text-white">{countdown}</span>
+      )}
     </>
   );
 }
 
-function AutumnSet() {
+function AutumnSet({
+  countdown,
+  setCountdown,
+  hovering,
+  setHovering,
+  getMusic,
+}) {
   useEffect(() => {
     gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
     leafPaths.forEach((path, idx) => {
@@ -117,6 +164,25 @@ function AutumnSet() {
       });
     });
   }, [leafPaths]);
+  useEffect(() => {
+    let timer;
+
+    if (hovering) {
+      timer = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
+    } else {
+      setCountdown(5); // Reset countdown when not hovering
+    }
+
+    if (countdown === 0) {
+      // Your function to be executed after 10 seconds of hovering
+      getMusic(true);
+      setCountdown(5); // Reset countdown after execution
+    }
+
+    return () => clearInterval(timer);
+  }, [hovering, countdown]); // Run effect when hovering or countdown changes
 
   return (
     <>
@@ -150,6 +216,14 @@ function AutumnSet() {
         </svg>
       </g>
       <g id="leaf2">
+        <rect
+          onMouseEnter={(e) => setHovering(true)}
+          onMouseLeave={(e) => setHovering(false)}
+          className=" !pointer-events-auto border-2 border-solid border-red-600 "
+          height={30}
+          width={30}
+          fill="transparent"
+        ></rect>
         <svg
           width="12"
           height="12"
@@ -557,7 +631,13 @@ function AutumnSet() {
   );
 }
 // ok
-function SummerSet() {
+function SummerSet({
+  countdown,
+  setCountdown,
+  hovering,
+  setHovering,
+  getMusic,
+}) {
   useEffect(() => {
     gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
     leafPaths.forEach((path, idx) => {
@@ -598,6 +678,25 @@ function SummerSet() {
       });
     });
   }, [leafPaths]);
+  useEffect(() => {
+    let timer;
+
+    if (hovering) {
+      timer = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
+    } else {
+      setCountdown(5); // Reset countdown when not hovering
+    }
+
+    if (countdown === 0) {
+      // Your function to be executed after 10 seconds of hovering
+      getMusic(true);
+      setCountdown(5); // Reset countdown after execution
+    }
+
+    return () => clearInterval(timer);
+  }, [hovering, countdown]); // Run effect when hovering or countdown changes
 
   return (
     <>
@@ -630,6 +729,14 @@ function SummerSet() {
         </svg>
       </g>
       <g id="leaf2">
+        <rect
+          onMouseEnter={(e) => setHovering(true)}
+          onMouseLeave={(e) => setHovering(false)}
+          className=" !pointer-events-auto border-2 border-solid border-red-600 "
+          height={30}
+          width={30}
+          fill="transparent"
+        ></rect>
         <svg
           width="12"
           height="12"
@@ -718,7 +825,13 @@ function SummerSet() {
 }
 
 // spring set is ok
-function SpringSet() {
+function SpringSet({
+  countdown,
+  setCountdown,
+  hovering,
+  setHovering,
+  getMusic,
+}) {
   useEffect(() => {
     gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
     leafPaths.forEach((path, idx) => {
@@ -760,6 +873,26 @@ function SpringSet() {
     });
   }, [leafPaths]);
 
+  useEffect(() => {
+    let timer;
+
+    if (hovering) {
+      timer = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
+    } else {
+      setCountdown(5); // Reset countdown when not hovering
+    }
+
+    if (countdown === 0) {
+      // Your function to be executed after 10 seconds of hovering
+      getMusic(true);
+      setCountdown(5); // Reset countdown after execution
+    }
+
+    return () => clearInterval(timer);
+  }, [hovering, countdown]); // Run effect when hovering or countdown changes
+
   return (
     <>
       <g id="leaf1">
@@ -779,7 +912,15 @@ function SpringSet() {
         </svg>
       </g>
 
-      <g id="leaf2">
+      <g id="leaf2" className="relative">
+        <rect
+          onMouseEnter={(e) => setHovering(true)}
+          onMouseLeave={(e) => setHovering(false)}
+          className=" !pointer-events-auto border-2 border-solid border-red-600 "
+          height={30}
+          width={30}
+          fill="transparent"
+        ></rect>
         <svg
           width="12"
           height="12"
@@ -901,7 +1042,13 @@ function SpringSet() {
   );
 }
 // ok
-function WinterSet() {
+function WinterSet({
+  countdown,
+  setCountdown,
+  hovering,
+  setHovering,
+  getMusic,
+}) {
   useEffect(() => {
     gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
     leafPaths.forEach((path, idx) => {
@@ -942,6 +1089,25 @@ function WinterSet() {
       });
     });
   }, [leafPaths]);
+  useEffect(() => {
+    let timer;
+
+    if (hovering) {
+      timer = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
+    } else {
+      setCountdown(5); // Reset countdown when not hovering
+    }
+
+    if (countdown === 0) {
+      // Your function to be executed after 10 seconds of hovering
+      getMusic(true);
+      setCountdown(5); // Reset countdown after execution
+    }
+
+    return () => clearInterval(timer);
+  }, [hovering, countdown]); // Run effect when hovering or countdown changes
 
   return (
     <>
@@ -961,6 +1127,14 @@ function WinterSet() {
       </g>
 
       <g id="leaf2">
+        <rect
+          onMouseEnter={(e) => setHovering(true)}
+          onMouseLeave={(e) => setHovering(false)}
+          className=" !pointer-events-auto border-2 border-solid border-red-600 "
+          height={30}
+          width={30}
+          fill="transparent"
+        ></rect>
         <svg
           width="12"
           height="12"

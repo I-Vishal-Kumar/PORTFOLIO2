@@ -44,7 +44,7 @@ export default function Home() {
       {/* {loading && ( */}
       <motion.div
         initial={{ opacity: 1 }}
-        animate={!loading && { opacity: 0 }}
+        animate={!loading && { opacity: 0, display: "hidden" }}
         className="absolute h-screen w-screen pointer-events-none bg-white top-0 left-0 z-[1000]"
       >
         <Loading />
