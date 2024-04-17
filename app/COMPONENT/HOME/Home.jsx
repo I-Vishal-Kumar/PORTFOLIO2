@@ -8,6 +8,7 @@ import Experience from "../SECTIONS/Experience/Experience";
 import { motion } from "framer-motion";
 import LeafDecor from "../DECORATIONS/LeafDecor";
 import Guage from "../SECTIONS/Guage/Guage";
+import Link from "next/link";
 
 const accentColor = {
   spring: { bg: "#F94994", accent: "#fdaef0" },
@@ -103,7 +104,9 @@ export const Page1 = ({ season }) => {
             </div>
             {/* social icons */}
             <div className=" w-[10%] flex flex-col items-center gap-y-3 ">
-              <div
+              <Link
+                target="_blank"
+                href={"https://github.com/I-Vishal-Kumar"}
                 style={{ boxShadow: "0 0 10px 0.5px #c6c6c6" }}
                 className="rounded-full hover:scale-[1.08] size-7 flex justify-center items-center bg-gray-200"
               >
@@ -113,8 +116,10 @@ export const Page1 = ({ season }) => {
                   width={20}
                   alt="github"
                 />
-              </div>
-              <div
+              </Link>
+              <Link
+                target="_blank"
+                href={"https://www.instagram.com/joker._9.0/"}
                 style={{ boxShadow: "0 0 10px 0.5px #c6c6c6" }}
                 className="rounded-full hover:scale-[1.08]  size-7 flex justify-center items-center bg-gray-200"
               >
@@ -217,8 +222,10 @@ export const Page1 = ({ season }) => {
                     ></circle>
                   </g>
                 </svg>
-              </div>
-              <div
+              </Link>
+              <Link
+                target="_blank"
+                href={"mailto:vishal2983kumar@example.com"}
                 style={{ boxShadow: "0 0 10px 0.5px #c6c6c6" }}
                 className="rounded-full hover:scale-[1.08]  size-7 flex justify-center items-center bg-gray-200"
               >
@@ -252,7 +259,7 @@ export const Page1 = ({ season }) => {
                     d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C38.868,8.301,39.772,8,40.702,8h0 C43.076,8,45,9.924,45,12.298z"
                   ></path>
                 </svg>
-              </div>
+              </Link>
             </div>
           </div>
           {/* name and about */}

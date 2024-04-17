@@ -33,7 +33,6 @@ export const Page2 = () => {
         trigger: "#boxLength",
         start: "top 20%",
         end: "bottom -30%",
-        // markers: true,
         clientLeft: 0.5,
         scrub: true,
         ease: "power1.inOut",
@@ -56,7 +55,7 @@ export const Page2 = () => {
       className="w-full relative  overflow-x-hidden pb-40 overflow-scroll bg-[#fafafa] px-5 text-gray-950"
     >
       {/* name */}
-      <div className="h-[13rem] font-semibold font-caveat flex items-center text-3xl capitalize ">
+      <div className="h-[13rem] ml-2 font-semibold font-caveat flex items-center text-3xl capitalize ">
         <h1>vishal</h1>
       </div>
       {/* about me section */}
@@ -325,7 +324,12 @@ export const Page2 = () => {
             </div>
           </div>
           <div className="flex items-center mt-3 gap-x-1 ">
-            <Link href={"test"}>Linkdin</Link>
+            <Link
+              target="_blank"
+              href={"https://www.linkedin.com/in/vishal-kumar-slfkfjd/"}
+            >
+              Linkdin
+            </Link>
             <div className="mt-1.5">
               <Image
                 className="size-4 -rotate-[40deg] "
@@ -337,7 +341,12 @@ export const Page2 = () => {
             </div>
           </div>
           <div className="flex items-center gap-x-1 ">
-            <Link href={"test"}>Instagram</Link>
+            <Link
+              target="_blank"
+              href={"https://www.instagram.com/joker._9.0/"}
+            >
+              Instagram
+            </Link>
             <div className="mt-1.5">
               <Image
                 className="size-4 -rotate-[40deg] "
@@ -349,7 +358,9 @@ export const Page2 = () => {
             </div>
           </div>
           <div className="flex items-center gap-x-1 ">
-            <Link href={"test"}>Email me</Link>
+            <Link target="_blank" href={"mailto:vishal2983kumar@example.com"}>
+              Email me
+            </Link>
             <div className="mt-1.5">
               <Image
                 className="size-4 -rotate-[40deg] "
@@ -376,10 +387,12 @@ export const Page2 = () => {
           <div className="bg-red-300 rounded-full size-6 -translate-x-1 translate-y-1 "></div>
         </div> */}
         {/* social media's */}
-        <div className="mt-10 flex flex-col items-center gap-y-3 ">
-          <div
+        <div className="mt-10 flex flex-col items-center gap-y-4 ">
+          <Link
+            target="_blank"
+            href={"https://github.com/I-Vishal-Kumar"}
             style={{ boxShadow: "0 0 10px 0.5px #c6c6c6" }}
-            className="rounded-full size-7 flex justify-center items-center bg-gray-200"
+            className="rounded-full size-7 flex justify-center items-center bg-gray-100"
           >
             <Image
               alt="github"
@@ -387,10 +400,12 @@ export const Page2 = () => {
               height={20}
               width={20}
             />
-          </div>
-          <div
+          </Link>
+          <Link
+            target="_blank"
+            href={"https://www.instagram.com/joker._9.0/"}
             style={{ boxShadow: "0 0 10px 0.5px #c6c6c6" }}
-            className="rounded-full size-7 flex justify-center items-center bg-gray-200"
+            className="rounded-full size-7 flex justify-center items-center bg-gray-100"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -491,10 +506,12 @@ export const Page2 = () => {
                 ></circle>
               </g>
             </svg>
-          </div>
-          <div
+          </Link>
+          <Link
+            target="_blank"
+            href={"mailto:vishal2983kumar@example.com"}
             style={{ boxShadow: "0 0 10px 0.5px #c6c6c6" }}
-            className="rounded-full size-7 flex justify-center items-center bg-gray-200"
+            className="rounded-full size-7 flex justify-center items-center bg-gray-100"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -526,7 +543,7 @@ export const Page2 = () => {
                 d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C38.868,8.301,39.772,8,40.702,8h0 C43.076,8,45,9.924,45,12.298z"
               ></path>
             </svg>
-          </div>
+          </Link>
         </div>
         {/* svg box */}
         <div
@@ -549,7 +566,15 @@ export const Page2 = () => {
               strokeWidth="1"
               strokeDasharray={5}
             />
-            <circle r={4} fill="#ad6fff" ref={leafRef} id="circle" />
+            <circle
+              cx={-5}
+              cy={-5}
+              r={4}
+              // fill="#ad6fff"
+              fill="blue"
+              ref={leafRef}
+              id="circle"
+            />
           </svg>
         </div>
       </div>
@@ -561,14 +586,12 @@ function Project() {
   return (
     <div
       style={{ boxShadow: "0 0 8px 0px #e5e5e5 " }}
-      className="rounded-md bg-slate-100 border-[1.2px] border-solid border-orange-100 "
+      className="rounded-md bg-slate-50 "
     >
       <div className="flex">
         <div className="w-[70%] py-2 px-4">
-          <p className="font-caveat font-semibold text-lg text-gray-900 ">
-            Project 1
-          </p>
-          <p className="text-sm font-itim leading-5 text-gray-700">
+          <p className="font-itim  text-[0.9rem] text-gray-900 ">Project 1</p>
+          <p className="text-[0.75rem] font-itim leading-4 text-gray-700">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere,
             quisquam?
           </p>
@@ -576,16 +599,16 @@ function Project() {
         <div className="w-[30%"></div>
       </div>
       <div className="space-x-3 flex px-4 py-2 ">
-        <div className="bg-slate-300 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
+        <div className="bg-slate-100 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
           node js
         </div>
-        <div className="bg-slate-300 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
+        <div className="bg-slate-100 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
           react
         </div>
-        <div className="bg-slate-300 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
+        <div className="bg-slate-100 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
           mongodb
         </div>
-        <div className="bg-slate-300 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
+        <div className="bg-slate-100 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
           nextjs
         </div>
       </div>
