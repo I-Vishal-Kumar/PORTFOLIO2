@@ -267,8 +267,8 @@ export const Page1 = ({ season }) => {
             <h2 className=" font-caveat text-xl font-semibold ">Vishal</h2>
             <div className="mt-3 px-3 text-[#262626] font-itim ">
               <p className="text-sm leading-5 ">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Consequatur asperiores a
+                Hey there! I&apos;m Vishal , a dedicated web developer with a
+                flair for innovation and problem-solving.
               </p>
             </div>
           </div>

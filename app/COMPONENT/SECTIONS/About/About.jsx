@@ -127,11 +127,13 @@ export default function About() {
         </div>
         <div className="space-y-3 text-sm ">
           <p className="font-itim text-gray-700 text-wrap leading-5 pr-4 ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A pariatur
-            corrupti maiores, aliquam consequuntur vero culpa quam eaque
+            I&apos;m a versatile web developer specializing in the MERN stack .
+            I thrive in the world of full-stack development. From designing
+            responsive user interfaces to building robust backend systems, I
+            enjoy every aspect of the development process.
           </p>
           <p className="font-itim text-gray-950">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Let&apos;s collaborate and bring your ideas to life!.
           </p>
         </div>
         {/* skills */}

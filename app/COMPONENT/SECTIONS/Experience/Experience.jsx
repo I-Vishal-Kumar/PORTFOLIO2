@@ -13,28 +13,18 @@ export default function Experience() {
           >
             <div className="flex space-x-2">
               <div className="w-[70%]">
-                <p className="text-sm px-4 py-3 leading-5 ">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ducimus necessitatibus molestiae dolore magnam accusamus dolor
-                  consequuntur eaque maiores repellat velit!
+                <p className="text-sm space-y-2 font-itim px-4 py-3 leading-5 ">
+                  <h2 className="text-[1rem]">
+                    Veritech (web development internship)
+                  </h2>
+                  <p>
+                    Got an oppurtunity to work with a team of 5 people to build
+                    a website for a company called Veritech.
+                  </p>
+                  <h2 className="text-[0.75rem]">05/01/2023 - 05/02/2023</h2>
                 </p>
               </div>
               <div className="w-[30%]"></div>
-            </div>
-            <div className="w-full flex gap-x-2 py-2 px-4">
-              {/* tech skill's */}
-              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
-                <p className="capitalize text-sm">node js</p>
-              </div>
-              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
-                <p className="capitalize text-sm">javascript</p>
-              </div>
-              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
-                <p className="capitalize text-sm">react js</p>
-              </div>
-              <div className="px-3 flex justify-center items-center w-fit rounded-md py-0.5 bg-white text-[#484848]">
-                <p className="capitalize text-sm">next js</p>
-              </div>
             </div>
           </div>
         ))}

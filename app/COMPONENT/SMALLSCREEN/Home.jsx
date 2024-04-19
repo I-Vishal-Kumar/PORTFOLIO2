@@ -7,6 +7,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
 import { gsap } from "gsap";
+const projects = [
+  {
+    name: "Norvellfootball",
+    description:
+      "A football betting platform , allow's people to predict the scores with Live Matche's .",
+    tech: ["Next js", "Mongo db", "Tailwind", "vercell cron"],
+  },
+  {
+    name: "File Transfer",
+    description:
+      "File transfer website allow's people to transfer files at very ease and effectivly from their pc to smartphones without cable connectivity.",
+    tech: ["Node js", "React js", "Tailwind", "socket io"],
+  },
+];
 
 export const Page2 = () => {
   const skillRef = useRef();
@@ -105,11 +119,12 @@ export const Page2 = () => {
         </div>
         <div className="space-y-3 text-sm ">
           <p className="font-itim text-gray-700 leading-5 pr-4 ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A pariatur
-            corrupti maiores, aliquam consequuntur vero culpa quam eaque
+            I&apos;m a versatile web developer specializing in the MERN stack .
+            I thrive in the world of full-stack development. From designing
+            responsive user interfaces to building robust backend systems.
           </p>
           <p className="font-itim text-gray-950">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Let&apos;s collaborate and bring your ideas to life!.
           </p>
         </div>
         {/* skills */}
@@ -195,10 +210,11 @@ export const Page2 = () => {
           <h1 className="font-itim text-xl">Project&apos;s</h1>
         </div>
         {/* projects */}
-        <Project />
-        <Project />
-        <Project />
-        <Project />
+        {projects.map((project, idx) => (
+          <div key={idx}>
+            <Project data={project} />
+          </div>
+        ))}
       </div>
 
       {/* skills section */}
@@ -237,12 +253,14 @@ export const Page2 = () => {
             className="bg-gray-100 flex space-x-1 rounded-md px-4 font-itim py-2 "
           >
             <div className="w-[70%] text-xs space-y-2">
-              <h1 className="text-[0.9rem]">Lorem, ipsum dolor.</h1>
-              <h1 className="text-[0.75rem]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Asperiores, eaque.
+              <h1 className="text-[0.9rem]">
+                Veritech (Web development internship){" "}
               </h1>
-              <h1 className="text-[0.65rem]">Lorem ipsum dolor sit.</h1>
+              <h1 className="text-[0.75rem]">
+                Got an oppurtunity to work with a team of 5 people to build a
+                website for a company called Veritech.
+              </h1>
+              <h1 className="text-[0.65rem]">05/01/2023 - 05/02/2023</h1>
             </div>
             <div className="w-[30%] space-y-2">
               <div className="h-[70%] bg-gray-200 w-full "></div>
@@ -266,12 +284,11 @@ export const Page2 = () => {
             className="bg-gray-100 flex space-x-1 rounded-md px-4 font-itim py-2 "
           >
             <div className=" text-xs space-y-2">
-              <h1 className="text-[0.9rem]">Lorem, ipsum dolor.</h1>
+              <h1 className="text-[0.9rem]">B-tech (2020 - 2024)</h1>
               <h1 className="text-[0.75rem]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Asperiores, eaque.
+                Bhagwati Institute of Technology and Science , Ghaziabad
               </h1>
-              <h1 className="text-[0.65rem]">Lorem ipsum dolor sit.</h1>
+              <h1 className="text-[0.65rem] font-bold">76.5</h1>
             </div>
           </div>
           <div
@@ -279,12 +296,13 @@ export const Page2 = () => {
             className="bg-gray-100 flex space-x-1 rounded-md px-4 font-itim py-2 "
           >
             <div className=" text-xs space-y-2">
-              <h1 className="text-[0.9rem]">Lorem, ipsum dolor.</h1>
-              <h1 className="text-[0.75rem]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Asperiores, eaque.
+              <h1 className="text-[0.9rem]">
+                Heigher Secondary Education (2019 - 2020)
               </h1>
-              <h1 className="text-[0.65rem]">Lorem ipsum dolor sit.</h1>
+              <h1 className="text-[0.75rem]">
+                D.A.V Public School , Jharkhand
+              </h1>
+              <h1 className="text-[0.65rem] font-bold"> 82.5 </h1>
             </div>
           </div>
           <div
@@ -292,12 +310,13 @@ export const Page2 = () => {
             className="bg-gray-100 flex space-x-1 rounded-md px-4 font-itim py-2 "
           >
             <div className=" text-xs space-y-2">
-              <h1 className="text-[0.9rem]">Lorem, ipsum dolor.</h1>
-              <h1 className="text-[0.75rem]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Asperiores, eaque.
+              <h1 className="text-[0.9rem]">
+                Secondary Education (2018 - 2019)
               </h1>
-              <h1 className="text-[0.65rem]">Lorem ipsum dolor sit.</h1>
+              <h1 className="text-[0.75rem]">
+                D.A.V Public School , Jharkhand
+              </h1>
+              <h1 className="text-[0.65rem] font-bold">76.6</h1>
             </div>
           </div>
         </div>
@@ -582,7 +601,7 @@ export const Page2 = () => {
   );
 };
 
-function Project() {
+function Project({ data }) {
   return (
     <div
       style={{ boxShadow: "0 0 8px 0px #e5e5e5 " }}
@@ -590,27 +609,22 @@ function Project() {
     >
       <div className="flex">
         <div className="w-[70%] py-2 px-4">
-          <p className="font-itim  text-[0.9rem] text-gray-900 ">Project 1</p>
+          <p className="font-itim  text-[0.9rem] text-gray-900 ">{data.name}</p>
           <p className="text-[0.75rem] font-itim leading-4 text-gray-700">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere,
-            quisquam?
+            {data.description}
           </p>
         </div>
         <div className="w-[30%"></div>
       </div>
-      <div className="space-x-3 flex px-4 py-2 ">
-        <div className="bg-slate-100 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
-          node js
-        </div>
-        <div className="bg-slate-100 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
-          react
-        </div>
-        <div className="bg-slate-100 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
-          mongodb
-        </div>
-        <div className="bg-slate-100 text-center w-fit px-3 rounded-md capitalize font-itim text-gray-600 text-xs ">
-          nextjs
-        </div>
+      <div className="space-x-3 flex px-4 py-2 justify-between ">
+        {data.tech.map((lang, idx) => (
+          <div
+            key={`lang-${idx}`}
+            className="bg-slate-100 text-center  w-fit rounded-md capitalize font-itim text-gray-600 text-xs "
+          >
+            {lang}
+          </div>
+        ))}
       </div>
     </div>
   );
