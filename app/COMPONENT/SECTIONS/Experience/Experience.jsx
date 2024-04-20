@@ -13,16 +13,25 @@ export default function Experience() {
           >
             <div className="flex space-x-2">
               <div className="w-[70%]">
-                <p className="text-sm space-y-2 font-itim px-4 py-3 leading-5 ">
-                  <h2 className="text-[1rem]">
-                    Veritech (web development internship)
-                  </h2>
+                <div className="text-sm space-y-2 font-itim px-4 py-3 leading-5 ">
+                  <div className="text-[1rem] flex gap-x-2">
+                    <p>Veritech</p>
+                    <Link
+                      href={
+                        "https://drive.google.com/file/d/1yjroa-zEPrqlGeX3HB_KqdKLj_h70n7o/view?usp=drive_link"
+                      }
+                      target="_blank"
+                      className=" text-[1rem] text-blue-500"
+                    >
+                      (web development internship)
+                    </Link>
+                  </div>
                   <p>
                     Got an oppurtunity to work with a team of 5 people to build
                     a website for a company called Veritech.
                   </p>
                   <h2 className="text-[0.75rem]">05/01/2023 - 05/02/2023</h2>
-                </p>
+                </div>
               </div>
               <div className="w-[30%]"></div>
             </div>
@@ -43,7 +52,8 @@ export default function Experience() {
             Alternatively, here&apos;s a fancy sheet of paper.
             <Link
               className="text-blue-600 text-[1.1rem] ml-2 underline"
-              href={"#"}
+              href={"/resume.pdf"}
+              target="_blank"
             >
               Resume
             </Link>

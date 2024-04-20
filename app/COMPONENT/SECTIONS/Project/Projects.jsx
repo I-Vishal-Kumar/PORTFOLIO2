@@ -1,15 +1,19 @@
+import Link from "next/link";
+
 const projects = [
   {
     name: "Norvellfootball",
     description:
       "A football betting platform , allow's people to predict the scores with Live Matche's .",
     tech: ["Next js", "Mongo db", "Tailwind", "vercell cron"],
+    live: "https://norvell.vercel.app/access/login",
   },
   {
     name: "File Transfer",
     description:
       "File transfer website allow's people to transfer files at very ease and effectivly from their pc to smartphones without cable connectivity.",
     tech: ["Node js", "React js", "Tailwind", "socket io"],
+    live: "tester",
   },
 ];
 export default function Projects() {
@@ -24,10 +28,20 @@ export default function Projects() {
           >
             <div className="flex space-x-2">
               <div className="w-[70%]">
-                <p className="text-sm px-4 py-3 leading-5 ">
-                  <h2 className="text-lg">{item.name}</h2>
+                <div className="text-sm px-4 py-3 leading-5 ">
+                  <div className="flex space-x-2">
+                    <h2 className="text-lg">{item.name}</h2>
+                    <Link
+                      href={item.live}
+                      target="_blank"
+                      className="text-lg text-blue-500"
+                    >
+                      (Live)
+                    </Link>
+                  </div>
+
                   {item.description}
-                </p>
+                </div>
               </div>
               <div className="w-[30%]"></div>
             </div>

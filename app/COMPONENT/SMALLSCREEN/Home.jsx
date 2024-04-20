@@ -13,12 +13,14 @@ const projects = [
     description:
       "A football betting platform , allow's people to predict the scores with Live Matche's .",
     tech: ["Next js", "Mongo db", "Tailwind", "vercell cron"],
+    live: "https://norvell.vercel.app/access/login",
   },
   {
     name: "File Transfer",
     description:
       "File transfer website allow's people to transfer files at very ease and effectivly from their pc to smartphones without cable connectivity.",
     tech: ["Node js", "React js", "Tailwind", "socket io"],
+    live: "",
   },
 ];
 
@@ -253,9 +255,18 @@ export const Page2 = () => {
             className="bg-gray-100 flex space-x-1 rounded-md px-4 font-itim py-2 "
           >
             <div className="w-[70%] text-xs space-y-2">
-              <h1 className="text-[0.9rem]">
-                Veritech (Web development internship){" "}
-              </h1>
+              <div className=" flex gap-x-2 text-[0.9rem]">
+                <p>Veritech</p>
+                <Link
+                  href={
+                    "https://drive.google.com/file/d/1yjroa-zEPrqlGeX3HB_KqdKLj_h70n7o/view?usp=drive_link"
+                  }
+                  target="_blank"
+                  className="text-[0.75rem] text-blue-500"
+                >
+                  (web development internship)
+                </Link>
+              </div>
               <h1 className="text-[0.75rem]">
                 Got an oppurtunity to work with a team of 5 people to build a
                 website for a company called Veritech.
@@ -265,7 +276,7 @@ export const Page2 = () => {
             <div className="w-[30%] space-y-2">
               <div className="h-[70%] bg-gray-200 w-full "></div>
               <div className="h-[30%] text-xs text-center capitalize">
-                <h1>hello there</h1>
+                {/* <h1>hello there</h1> */}
               </div>
             </div>
           </div>
@@ -331,7 +342,9 @@ export const Page2 = () => {
         <p>Alternatively, here&apos;s a fancy sheet of paper.</p>
         <div className="flex flex-col text-blue-600 text-[1.1rem] leading-8 ">
           <div className="flex items-center gap-x-1 ">
-            <Link href={"test"}>Resume</Link>
+            <Link href={"/resume.pdf"} target="_blank">
+              Resume
+            </Link>
             <div className="mt-1.5">
               <Image
                 className="size-4 -rotate-[40deg] "
@@ -609,7 +622,16 @@ function Project({ data }) {
     >
       <div className="flex">
         <div className="w-[70%] py-2 px-4">
-          <p className="font-itim  text-[0.9rem] text-gray-900 ">{data.name}</p>
+          <div className="font-itim flex items-center space-x-2  text-gray-900 ">
+            <p className="text-[0.9rem]">{data.name}</p>
+            <Link
+              href={data?.live}
+              target="_blank"
+              className="text-lg text-blue-500"
+            >
+              (Live)
+            </Link>
+          </div>
           <p className="text-[0.75rem] font-itim leading-4 text-gray-700">
             {data.description}
           </p>
