@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const projects = [
     {
-        name: "Norvellfootball",
+        name: "CB-football",
         description:
             "A football betting platform , allow's people to predict the scores with Live Matche's .",
         tech: ["Next js", "Mongo db", "Tailwind", "vercell cron"],
