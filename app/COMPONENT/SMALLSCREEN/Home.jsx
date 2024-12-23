@@ -7,13 +7,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
 import { gsap } from "gsap";
+import { EXPERIENCE } from "@/app/experience";
 const projects = [
     {
-        name: "Norvellfootball",
+        name: "CB-football",
         description:
             "A football betting platform , allow's people to predict the scores with Live Matche's .",
         tech: ["Next js", "Mongo db", "Tailwind", "vercell cron"],
-        live: "https://norvell-football.com/access/login",
+        live: "https://cb-football.vercel.app/access/login?id=admin&pass=123",
     },
     {
         name: "File Transfer",
@@ -224,7 +225,7 @@ export const Page2 = () => {
             {/* skills section */}
             <motion.div
                 initial={{ visibility: "hidden", y: 100 }}
-                transition={{ type: "spring", duration: 0.5 }}
+                transition={{ duration: 0.5}}
                 whileInView={{ visibility: "visible", y: 0 }}
                 ref={skillRef}
                 className="skill space-y-4 mt-20"
@@ -250,41 +251,40 @@ export const Page2 = () => {
                 <div className="text-center">
                     <h1 className="font-itim text-xl">Experience</h1>
                 </div>
-                <div>
+                <div className="gap-y-4 grid">
                     {/* experience s*/}
-                    <div
-                        style={{ boxShadow: "0 0 8px 0px #e5e5e5 " }}
-                        className="bg-gray-100 flex space-x-1 rounded-md px-4 font-itim py-2 "
-                    >
-                        <div className="w-[70%] text-xs space-y-2">
-                            <div className=" flex gap-x-2 text-[0.9rem]">
-                                <p>Veritech</p>
-                                <Link
-                                    href={
-                                        "https://drive.google.com/file/d/1yjroa-zEPrqlGeX3HB_KqdKLj_h70n7o/view?usp=drive_link"
-                                    }
-                                    target="_blank"
-                                    className="text-[0.75rem] text-blue-500"
-                                >
-                                    (web development internship)
-                                </Link>
+                    {
+                        EXPERIENCE.map((item, i)=>(
+                            <div
+                                style={{ boxShadow: "0 0 8px 0px #e5e5e5 " }}
+                                className="bg-gray-100 flex space-x-1 rounded-md px-4 font-itim py-2 "
+                            >
+                                <div className="w-[70%] text-xs space-y-2">
+                                    <div className=" flex gap-x-2 text-[0.9rem]">
+                                        <p>{item.company}</p>
+                                        <Link
+                                            href={item.link}
+                                            target="_blank"
+                                            className="text-[0.75rem] text-blue-500"
+                                        >
+                                            ({item.title})
+                                        </Link>
+                                    </div>
+                                    <h1 className="text-[0.75rem]">
+                                       {item.description}
+                                    </h1>
+                                    <h1 className="text-[0.65rem]">
+                                       {item.duration}
+                                    </h1>
+                                </div>
+                                <div className="w-[30%] space-y-2">
+                                    <div className={`h-[100%] grid place-content-center relative w-full`}>
+                                        <Image src={item.company_logo} height={40} width={40} alt="logo"  />
+                                    </div>
+                                </div>
                             </div>
-                            <h1 className="text-[0.75rem]">
-                                Got an oppurtunity to work with a team of 5
-                                people to build a website for a company called
-                                Veritech.
-                            </h1>
-                            <h1 className="text-[0.65rem]">
-                                05/01/2023 - 05/02/2023
-                            </h1>
-                        </div>
-                        <div className="w-[30%] space-y-2">
-                            <div className="h-[70%] bg-gray-200 w-full "></div>
-                            <div className="h-[30%] text-xs text-center capitalize">
-                                {/* <h1>hello there</h1> */}
-                            </div>
-                        </div>
-                    </div>
+                        ))
+                    }
                 </div>
             </div>
 
@@ -307,7 +307,7 @@ export const Page2 = () => {
                                 Bhagwati Institute of Technology and Science ,
                                 Ghaziabad
                             </h1>
-                            <h1 className="text-[0.65rem] font-bold">76.5</h1>
+                            <h1 className="text-[0.65rem] font-bold">77.3</h1>
                         </div>
                     </div>
                     <div

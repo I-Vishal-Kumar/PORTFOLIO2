@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Outro from "../OUTRO/Outro";
 import { motion } from "framer-motion";
+import { EXPERIENCE } from "@/app/experience";
+
 export default function Experience() {
   return (
     <div className="h-full pt-[10%] pb-4 w-full snap-align-start-10  bg-slate-200">
       <div className="h-full px-5 pr-10 flex flex-col justify-between ">
-        {[1].map((item, i) => (
+        {EXPERIENCE.map((item, i) => (
           <div
             key={i}
             style={{ boxShadow: "0 0 10px 1px #c2c2c2" }}
@@ -15,22 +17,19 @@ export default function Experience() {
               <div className="w-[70%]">
                 <div className="text-sm space-y-2 font-itim px-4 py-3 leading-5 ">
                   <div className="text-[1rem] flex gap-x-2">
-                    <p>Veritech</p>
+                    <p>{item.company}</p>
                     <Link
-                      href={
-                        "https://drive.google.com/file/d/1yjroa-zEPrqlGeX3HB_KqdKLj_h70n7o/view?usp=drive_link"
-                      }
+                      href={item.link}
                       target="_blank"
                       className=" text-[1rem] text-blue-500"
                     >
-                      (web development internship)
+                      {item.title}
                     </Link>
                   </div>
                   <p>
-                    Got an oppurtunity to work with a team of 5 people to build
-                    a website for a company called Veritech.
+                   {item.description}
                   </p>
-                  <h2 className="text-[0.75rem]">05/01/2023 - 05/02/2023</h2>
+                  <h2 className="text-[0.75rem]">{item.duration}</h2>
                 </div>
               </div>
               <div className="w-[30%]"></div>

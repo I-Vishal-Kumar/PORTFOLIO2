@@ -322,7 +322,7 @@ export const Page1 = ({ season }) => {
                                 stop={accentColor[currentSeason]?.accent}
                             />
                             <span className="absolute text-[0.6rem] font-semibold font-itim top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                75.6
+                                7.73
                             </span>
                         </div>
                     </div>
